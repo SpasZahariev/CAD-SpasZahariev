@@ -1,11 +1,16 @@
 # CAD-SpasZahariev
-Individual Coursework for COMP3207 Cloud Application Development
-
+## Individual Coursework for COMP3207 Cloud Application Development
 
 project uses the Angular CLI: 6.2.5 and Angular Material Packages
 
 to add Material Packages to project do 
 
-npm install --save @angular/material @angular/cdk @angular/animations
+`npm install --save @angular/material @angular/cdk @angular/animations`
 
 in the project folder
+
+### Alternative
+
+inside root project folder:
+`npm install`
+it is magical
