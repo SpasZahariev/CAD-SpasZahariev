@@ -1,13 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './home/app.component';
 import { GetHelloComponent } from './get-hello/get-hello.component';
+import { AppComponent } from './app.component';
+import { HomeComponent } from './home/home.component';
 
 
 
 const routes: Routes = [
-  {path: '', redirectTo: '/get-hello', pathMatch: 'full' },
-  {path: 'a', component: AppComponent},
+  // {path: '', redirectTo: '/get-hello', pathMatch: 'full' },
+  {path: '', component: HomeComponent},
   {path: 'get-hello', component: GetHelloComponent},
 ];
 
