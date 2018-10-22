@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { GetHelloComponent } from './get-hello/get-hello.component';
+import { GetHelloComponent } from './get-hello/component/get-hello.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 
