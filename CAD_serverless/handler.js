@@ -7,8 +7,8 @@ module.exports.hello = async (event, context) => {
       message: 'v1.0 Your function executed successfully! Spas:Cmon this time pls',
       input: event,
     }),
-    headers: { 
-      "Access-Control-Allow-Origin": "*" 
+    headers: {
+      "Access-Control-Allow-Origin": "*"
     },
   };
 
@@ -19,11 +19,19 @@ module.exports.hello = async (event, context) => {
 module.exports.imageResize = async (event, context) => {
   return {
     statusCode: 200,
-    body: JSON.stringify({
+    body: JSON.stringify([
+      {
       message: 'Resized your Image! are you kidding me?!!',
-    }),
-    headers: { 
-      "Access-Control-Allow-Origin": "*" 
+      },
+      {
+      message: 'Double the trouble',
+      },
+      {
+      message: 'Triple The fun',
+      },
+    ]),
+    headers: {
+      "Access-Control-Allow-Origin": "*"
     },
   };
 };
@@ -34,8 +42,8 @@ module.exports.imageResize = async (event, context) => {
 //     body: JSON.stringify({
 //       message: 'Resized your Image! are you kidding me?!!',
 //     }),
-//     headers: { 
-//       "Access-Control-Allow-Origin": "*" 
+//     headers: {
+//       "Access-Control-Allow-Origin": "*"
 //     },
 //   };
 //   var params = {
@@ -69,8 +77,8 @@ module.exports.postUser = async (event, context) => {
         message: 'Woohoo! You sent a JSON',
         object: json
       }),
-      headers: { 
-        "Access-Control-Allow-Origin": "*" 
+      headers: {
+        "Access-Control-Allow-Origin": "*"
       },
     });
   }
@@ -80,8 +88,8 @@ module.exports.postUser = async (event, context) => {
       body: JSON.stringify({
         message: 'Yes! You sent ' + queryStringParameters,
       }),
-      headers: { 
-        "Access-Control-Allow-Origin": "*" 
+      headers: {
+        "Access-Control-Allow-Origin": "*"
       },
     });
   }
