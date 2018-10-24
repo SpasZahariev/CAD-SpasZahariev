@@ -1,0 +1,43 @@
+service: lambda-test2
+provider:
+  name: aws
+  runtime: nodejs8.10
+  stage: dev
+  region: eu-west-2
+functions:
+  hello:
+    handler: handler.hello
+    events:
+     - http:
+         path: /default
+         method: get
+         cors: true
+  imageResize:
+    handler: handler.imageResize
+    events:
+     - http:
+         path: /imageResize
+         method: get
+         cors: true
+  postUser:
+    handler: handler.postUser
+    events:
+     - http:
+         path: /postUser
+         method: post
+         cors: true
+resources:
+  Resources:
+    usersCAD:
+      Type: AWS::DynamoDB::Table
+      Properties:
+        TableName: ${self:service}-${self:provider.stage}-usersCAD
+        AttributeDefinitions:
+          - AttributeName: userId
+            AttributeType: S
+        KeySchema:
+          - AttributeName: userId
+            KeyType: HASH
+        ProvisionedThroughput:
+          ReadCapacityUnits: 10
+          WriteCapacityUnits: 10
