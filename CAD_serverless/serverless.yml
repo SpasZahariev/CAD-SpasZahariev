@@ -19,21 +19,21 @@ provider:
 
 functions:
   hello:
-    handler: handler.hello
+    handler: getHandler.hello
     events:
      - http:
          path: /default
          method: get
          cors: true
   imageResize:
-    handler: handler.imageResize
+    handler: getHandler.imageResize
     events:
      - http:
          path: /imageResize
          method: get
          cors: true
   postUser:
-    handler: handler.postUser
+    handler: postHandler.postUser
     events:
      - http:
          path: /postUser
@@ -42,7 +42,7 @@ functions:
 resources:
   Resources:
     usersCAD:
-      Type: AWS::DynamoDB::Table
+      Type: 'AWS::DynamoDB::Table'
       Properties:
         TableName: ${self:service}-${self:provider.stage}-usersCAD
         AttributeDefinitions:
