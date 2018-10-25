@@ -1,11 +1,21 @@
-service: cad-serverless
+service: cad-sls
 provider:
   name: aws
   runtime: nodejs8.10
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+      Resource: "arn:aws:dynamodb:eu-west-2:*:*"
   stage: dev
   region: eu-west-2
   environment:
-    USER_TABLE_NAME: cad-serverless-dev-usersCAD
+    USER_TABLE_NAME: ${self:service}-${self:provider.stage}-usersCAD
 
 functions:
   hello:
@@ -42,5 +52,5 @@ resources:
           - AttributeName: userId
             KeyType: HASH
         ProvisionedThroughput:
-          ReadCapacityUnits: 10
-          WriteCapacityUnits: 10
+          ReadCapacityUnits: 1
+          WriteCapacityUnits: 1

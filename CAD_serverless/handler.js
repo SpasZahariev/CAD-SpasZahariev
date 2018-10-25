@@ -1,10 +1,7 @@
 'use strict';
-
 const AWS = require('aws-sdk');
 const uuid = require('uuid');
-// const docClient = new AWS.DynamoDB.DocumentClient({region:'eu-west-2'});
 const ddb = new AWS.DynamoDB.DocumentClient();
-
 
 module.exports.hello = async (event, context) => {
   return {
@@ -17,9 +14,6 @@ module.exports.hello = async (event, context) => {
       "Access-Control-Allow-Origin": "*"
     },
   };
-
-  // Use this code if you don't use the http event with the LAMBDA-PROXY integration
-  // return { message: 'Go Serverless v1.0! Your function executed successfully!', event };
 };
 
 module.exports.imageResize = async (event, context) => {
@@ -73,41 +67,62 @@ module.exports.imageResize = async (event, context) => {
 // };
 
 module.exports.postUser = async (event, context, callback) => {
+  const data = JSON.parse(event.body);
 
-  var params = {
-    Item : {
-      "userId": uuid.v1(),
-      "userRole": event.userRole
-    },
-    TableName: process.env.USER_TABLE_NAME
-  };
-  ddb.put(params, function(err, data){
-    callback(err, data);
-  });
+  if (typeof data.text !== 'string') {
+    console.error('Validation Failed');
+    callback(new Error('what have you sent to me?'));
+  }
+  const params = {
+    TableName: USER_TABLE_NAME,
+    Item: {
+      userId: uuid.v1(),
+      checked: false,
+    }
+  }
 
-//   if(event.httpMethod === "POST" && event.body){
-//     let json = JSON.parse(event.body);
+  ddb.put(params, (error, result) => {
+    if (error) {
+      console.error(error);
+      callback(new Error('Cannot insert the user!'));
+      return;
+    }
 
-//     return callback(null, {
-//       statusCode: 200,
-//       body: JSON.stringify({
-//         message: 'Woohoo! You sent a JSON',
-//         object: json
-//       }),
-//       headers: {
-//         "Access-Control-Allow-Origin": "*"
-//       },
-//     });
-//   }
-// if (event.queryStringParameters){
-//     return callback(null, {
-//       statusCode: 200,
-//       body: JSON.stringify({
-//         message: 'Yes! You sent ' + queryStringParameters,
-//       }),
-//       headers: {
-//         "Access-Control-Allow-Origin": "*"
-//       },
-//     });
-//   }
+    const response = {
+      statusCode: 200,
+      body: JSON.stringify(results.Item)
+    }
+    callback(null, response);
+  })
+
+  // if(event.httpMethod === "POST" && event.body){
+  //   let json = JSON.parse(event.body);
+  //   const id = json.userId;
+  //   recordUser(id).then(() => {
+  //     callback(null, {
+  //       statusCode: 201,
+  //       body: JSON.stringify({
+  //         message: 'Woohoo! You sent a JSON user',
+  //         object: json
+  //       }),
+  //       headers: {
+  //         "Access-Control-Allow-Origin": "*"
+  //       },
+  //     });
+  //   }).catch((err) => {
+  //     console.error(err);
+  //     errorResponse(err.message, context.awsRequestId, callback);
+  //   });
+  // }
+  // if (event.queryStringParameters){
+  //   return callback(null, {
+  //     statusCode: 200,
+  //     body: JSON.stringify({
+  //       message: 'Yesss! You sent ' + queryStringParameters,
+  //     }),
+  //     headers: {
+  //       "Access-Control-Allow-Origin": "*"
+  //     },
+  //   });
+  // }
 };
