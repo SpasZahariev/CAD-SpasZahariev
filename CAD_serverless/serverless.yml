@@ -4,6 +4,9 @@ provider:
   runtime: nodejs8.10
   stage: dev
   region: eu-west-2
+  environment:
+    USER_TABLE_NAME: cad-serverless-dev-usersCAD
+
 functions:
   hello:
     handler: handler.hello

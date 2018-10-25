@@ -1,5 +1,11 @@
 'use strict';
 
+const AWS = require('aws-sdk');
+const uuid = require('uuid');
+// const docClient = new AWS.DynamoDB.DocumentClient({region:'eu-west-2'});
+const ddb = new AWS.DynamoDB.DocumentClient();
+
+
 module.exports.hello = async (event, context) => {
   return {
     statusCode: 200,
@@ -66,31 +72,42 @@ module.exports.imageResize = async (event, context) => {
 //   });
 // };
 
-module.exports.postUser = async (event, context) => {
+module.exports.postUser = async (event, context, callback) => {
 
-  if(event.httpMethod === "POST" && event.body){
-    let json = JSON.parse(event.body);
+  var params = {
+    Item : {
+      "userId": uuid.v1(),
+      "userRole": event.userRole
+    },
+    TableName: process.env.USER_TABLE_NAME
+  };
+  ddb.put(params, function(err, data){
+    callback(err, data);
+  });
 
-    return callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Woohoo! You sent a JSON',
-        object: json
-      }),
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      },
-    });
-  }
-  if (event.queryStringParameters){
-    return callback(null, {
-      statusCode: 200,
-      body: JSON.stringify({
-        message: 'Yes! You sent ' + queryStringParameters,
-      }),
-      headers: {
-        "Access-Control-Allow-Origin": "*"
-      },
-    });
-  }
+//   if(event.httpMethod === "POST" && event.body){
+//     let json = JSON.parse(event.body);
+
+//     return callback(null, {
+//       statusCode: 200,
+//       body: JSON.stringify({
+//         message: 'Woohoo! You sent a JSON',
+//         object: json
+//       }),
+//       headers: {
+//         "Access-Control-Allow-Origin": "*"
+//       },
+//     });
+//   }
+// if (event.queryStringParameters){
+//     return callback(null, {
+//       statusCode: 200,
+//       body: JSON.stringify({
+//         message: 'Yes! You sent ' + queryStringParameters,
+//       }),
+//       headers: {
+//         "Access-Control-Allow-Origin": "*"
+//       },
+//     });
+//   }
 };
