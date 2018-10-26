@@ -21,8 +21,6 @@ provider:
   name: aws
   runtime: nodejs8.10
   region: eu-west-2
-  environment:
-    USER_TABLE_NAME: 'users'
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -69,9 +67,9 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello: 
+  hello:
     handler: handler.hello
-    events: 
+    events:
       - http:
           path: /get-hello
           method: get
@@ -86,11 +84,18 @@ functions:
   create:
     handler: users/create.create
     events:
-      - http: 
+      - http:
           path: users
           method: post
           cors: true
-  
+  returnAll:
+    handler: users/returnAll.returnAll
+    events:
+      - http:
+          path: /returnAll
+          method: get
+          cors: true
+
 
 #    The following are a few example events you can configure
 #    NOTE: Please make sure to change your handler code to work with those events
@@ -133,7 +138,7 @@ resources:
     DeletionPolicy: Retain
     Properties:
       AttributeDefinitions:
-        - 
+        -
           AttributeName: id
           AttributeType: S
       KeySchema:
