@@ -1,7 +1,0 @@
-{
-  "name": "sls-cad",
-  "dependencies": {
-    "aws-sdk": "^2.343.0",
-    "uuid": "^3.3.2"
-  }
-}

@@ -10,7 +10,7 @@ import { HelloAbstract } from './component/get-hello.component';
 export class GetHelloService {
 
   // private testURL = 'https://ex5ucwpo2g.execute-api.eu-west-2.amazonaws.com/production/imageResize';
-  private testURL = 'https://lh77z3nzj1.execute-api.eu-west-2.amazonaws.com/dev/imageResize';
+  private testURL = 'https://t2lpnjag86.execute-api.eu-west-2.amazonaws.com/dev/image-resize';
   // private testURL = 'https://lw923tw1gj.execute-api.eu-west-2.amazonaws.com/dev/default';
   // private testURL = 'https://jsonplaceholder.typicode.com/posts';
   constructor(private http: HttpClient) { }
