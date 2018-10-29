@@ -8,6 +8,25 @@
 </div>
 
 <br>
+<form [formGroup]="userForm" (submit)="sendToService(userName.value)">
+  <div class="flexInput">
+    <div class="form-group">
+        <mat-form-field
+            [hideRequiredMarker]="userForm.value.hideRequired"
+            [floatLabel]="userForm.value.floatLabel">
+          <input matInput placeholder="Simple placeholder" [formControl]="userName" type="text" required>
+          <mat-error *ngIf="userName.pristine">Big Nope!</mat-error>
+        </mat-form-field>
+    </div>
+
+    <button mat-fab color="primary" [disabled]="userName.pristine" type="submit">Submit</button>
+</div>
+</form>
+
+<br>
+
+<button mat-fab color="accent" (click)="sendToService()">Post</button>
+
 
 <!-- <mat-form-field>
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">

@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { $ } from 'protractor';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { GetHelloService } from '../get-hello.service';
 
 import {MatTableDataSource} from '@angular/material';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 
 export interface HelloAbstract {
   message: string;
@@ -33,13 +32,25 @@ export class GetHelloComponent implements OnInit {
   public displayedColumns: string[] = ['id', 'checked', 'createdAt', 'text', 'updatedAt'];
   public dataSource = new MatTableDataSource([]);
 
+  public userForm: FormGroup;
+  public userName = new FormControl('', [Validators.required, Validators.email]);
+
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-  constructor(private http: HttpClient, private helloService: GetHelloService) { }
+  constructor(private http: HttpClient, private helloService: GetHelloService, private fb: FormBuilder) {
+    this.userForm = fb.group({
+      hideRequired: false,
+      floatLabel: 'auto',
+    });
+  }
 
   ngOnInit() {
     this.showConfig();
+  }
+
+  public sendToService(userName: string) {
+    this.helloService.postUser(userName);
   }
 
   showConfig() {
@@ -54,7 +65,7 @@ export class GetHelloComponent implements OnInit {
             message: element.message,
           });
         });
-        console.log(this.finalMessages);
+        // console.log(this.finalMessages);
       });
 
     this.helloService.getUsers()
@@ -68,7 +79,7 @@ export class GetHelloComponent implements OnInit {
           updatedAt: element.updatedAt,
         });
         this.dataSource = new MatTableDataSource(this.users);
-        console.log(this.users);
+        // console.log(this.users);
       });
     });
   }
