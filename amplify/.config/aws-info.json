@@ -1,4 +1,4 @@
 {
-    "useProfile": true,
-    "profileName": "default"
+    "useProfile": false,
+    "awsConfigFilePath": "C:\\Users\\spasz\\.amplify\\awscloudformation\\AWZxtj7LVg"
 }

@@ -11,12 +11,14 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
+import { AuthTestComponent } from './auth-test/component/auth-test.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     GetHelloComponent,
-    HomeComponent
+    HomeComponent,
+    AuthTestComponent
   ],
   imports: [
     BrowserModule,
