@@ -11,7 +11,7 @@
 #
 # Happy Coding!
 
-service: serverless-rest-api # NOTE: update this with your service name
+service: sls-api-cad # NOTE: update this with your service name
 
 # You can pin your service to only deploy with a specific Serverless version
 # Check out our docs for more details
@@ -20,7 +20,7 @@ service: serverless-rest-api # NOTE: update this with your service name
 provider:
   name: aws
   runtime: nodejs8.10
-  region: eu-west-2
+  region: eu-west-1
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -31,7 +31,7 @@ provider:
         - dynamodb:PutItem
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
-      Resource: "arn:aws:dynamodb:eu-west-2:*:*"
+      Resource: "arn:aws:dynamodb:eu-west-1:*:*"
 
 # you can overwrite defaults here
 #  stage: dev
@@ -149,26 +149,50 @@ resources:
         ReadCapacityUnits: 1
         WriteCapacityUnits: 1
       TableName: 'users'
-  CognitoUserPool:
-    Type: 'AWS::Cognito::UserPool'
-    Properties:
-      # name can be based on stage ${self:custom.stage}-user-pool
-      UserPoolName: teammate-pool
-      # set email as an alias
-      UsernameAttributes:
-        - email
-      AutoVerifiedAttributes:
-        - email
-  CognitoUserPoolClient:
-    Type: 'AWS::Cognito::UserPoolClient'
-    Properties:
-      # generate app client name based on stage ${self:custom.stage}-user-pool-client
-      ClientName: teammate-pool-client
-      UserPoolId:
-        Ref: CognitoUserPool
-      ExplicitAuthFlows:
-        - ADMIN_NO_SRP_AUTH
-      GenerateSecret: false
+  # CognitoUserPool:
+  #   Type: 'AWS::Cognito::UserPool'
+  #   Properties:
+  #     # name can be based on stage ${self:custom.stage}-user-pool
+  #     UserPoolName: teammate-pool
+  #     # set email as an alias
+  #     UsernameAttributes:
+  #       - email
+  #     AutoVerifiedAttributes:
+  #       - email
+  # CognitoUserPoolClient:
+  #   Type: 'AWS::Cognito::UserPoolClient'
+  #   Properties:
+  #     # generate app client name based on stage ${self:custom.stage}-user-pool-client
+  #     ClientName: teammate-pool-client
+  #     UserPoolId:
+  #       Ref: CognitoUserPool
+  #     ExplicitAuthFlows:
+  #       - ADMIN_NO_SRP_AUTH
+  #     GenerateSecret: false
+  # CognitoIdentityPool:
+  #   # identities for the users to authenticate with
+  #   CognitoIdentityPool:
+  #     Type: 'AWS::Cognito::IdentityPool'
+  #     Properties:
+  #       IdentityPoolName: Identity-pool
+  #       # Don't allow unauthenticated users
+  #       AllowUnauthenticatedIdentities: false
+  #       # Link to User Pool
+  #       CognitoIdentityProviders:
+  #         - ClientIde:
+  #             Ref: CognitoUserPoolClient
+  #           ProviderName:
+  #             Fn:GetAtt: ["CognitoUserPool", "ProviderName"]
+  # CognitoIdentityPoolRoles:
+  #   # IAM roles
+  #   Type: 'AWS::Cognito::IdentityPoolRoleAttachment'
+  #   Properties:
+  #     IdentityPoolId:
+  #       Ref: CognitoIdentityPool
+  #     Roles:
+  #       authenticated:
+  #         Fn::GetAtt: [CognitoAuthRole, Arn]
+
 #    NewResource:
 #      Type: AWS::S3::Bucket
 #      Properties:

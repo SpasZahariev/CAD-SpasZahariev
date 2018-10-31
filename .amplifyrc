@@ -1,0 +1,14 @@
+{
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "pasahariev-20181031135226-authRole",
+            "UnauthRoleArn": "arn:aws:iam::001076823091:role/pasahariev-20181031135226-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::001076823091:role/pasahariev-20181031135226-authRole",
+            "Region": "eu-west-2",
+            "DeploymentBucketName": "pasahariev-20181031135226-deployment",
+            "UnauthRoleName": "pasahariev-20181031135226-unauthRole",
+            "StackName": "pasahariev-20181031135226",
+            "StackId": "arn:aws:cloudformation:eu-west-2:001076823091:stack/pasahariev-20181031135226/d30aa8b0-dd0b-11e8-a425-504dcd6bf9fe"
+        }
+    }
+}
