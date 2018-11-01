@@ -1,0 +1,21 @@
+
+
+.table-flexbox{
+  margin: 10px;
+  display:flex;
+  flex-direction: row;
+  /* flex-flow: wrap; */
+  /* justify-content: space-between; */
+  align-items: stretch;
+}
+
+.left-flexbox{
+  margin-right: 10px;
+  flex-grow: 2;
+}
+
+.right-flexbox{
+  /* flex-grow: 1; */
+  flex-grow: 0.7;
+}
+

@@ -12,7 +12,8 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { AuthTestComponent } from './auth-test/component/auth-test.component';
-import { ProfilePageComponent } from './profile-page/profile-page.component';
+import { ProfilePageComponent } from './profile-page/component/profile-page.component';
+import { ExpandingTableComponent } from './profile-page/expanding-table/component/expanding-table.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { ProfilePageComponent } from './profile-page/profile-page.component';
     GetHelloComponent,
     HomeComponent,
     AuthTestComponent,
-    ProfilePageComponent
+    ProfilePageComponent,
+    ExpandingTableComponent
   ],
   imports: [
     BrowserModule,
