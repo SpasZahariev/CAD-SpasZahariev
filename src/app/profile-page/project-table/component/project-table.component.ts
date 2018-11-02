@@ -26,6 +26,7 @@ export class ProjectTableComponent implements OnInit {
   displayedColumns: string[] = ['name', 'status', 'manager'];
   public selection = new SelectionModel<IProjectData>(true, []);
   public dataSource = new MatTableDataSource<IProjectData>([]);
+  public selectedRowIndex = -1;
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 
@@ -40,15 +41,15 @@ export class ProjectTableComponent implements OnInit {
     });
   }
 
+  public highlight(row: any) {
+    this.selectedRowIndex = row.id;
+  }
+
   public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
-  }
-
-  public selectRow(input: any) {
-    console.log(input);
   }
 }

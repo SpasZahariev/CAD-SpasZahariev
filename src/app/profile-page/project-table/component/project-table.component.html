@@ -27,7 +27,9 @@
       </ng-container>
 
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row">
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="example-element-row"
+          [ngClass]="{'highlight': selectedRowIndex == row.id}"
+          (click)="highlight(row)">
       </tr>
     </table>
   </div>
