@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort } from '@angular/material';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import {SelectionModel} from '@angular/cdk/collections';
@@ -17,14 +17,14 @@ export class ExpandingTableComponent implements OnInit {
   displayedColumns: string[] = ['select', 'created', 'state', 'number', 'title'];
   selection = new SelectionModel<GithubIssue>(true, []);
   exampleDatabase: ExampleHttpDao | null;
-  dataSource: GithubIssue[] = [];
+  // dataSource: GithubIssue[] = [];
+  dataSource = new MatTableDataSource<GithubIssue>([]);
 
   resultsLength = 0;
   isLoadingResults = true;
   isRateLimitReached = false;
 
-  @ViewChild(MatPaginator)
-  paginator: MatPaginator;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort)
   sort: MatSort;
 
@@ -36,7 +36,7 @@ export class ExpandingTableComponent implements OnInit {
 
     // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => (this.paginator.pageIndex = 0));
-
+    this.dataSource.paginator = this.paginator;
     merge(this.sort.sortChange, this.paginator.page)
       .pipe(
         startWith({}),
@@ -63,13 +63,21 @@ export class ExpandingTableComponent implements OnInit {
           return observableOf([]);
         })
       )
-      .subscribe(data => (this.dataSource = data));
+      .subscribe(data => (this.dataSource = new MatTableDataSource(data)));
+  }
+
+  applyFilter(filterValue: string) {
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
   }
 
    /** Whether the number of selected elements matches the total number of rows. */
    isAllSelected() {
     const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.length;
+    const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
@@ -77,7 +85,7 @@ export class ExpandingTableComponent implements OnInit {
   masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
-        this.dataSource.forEach(row => this.selection.select(row));
+        this.dataSource.data.forEach(row => this.selection.select(row));
   }
 }
 

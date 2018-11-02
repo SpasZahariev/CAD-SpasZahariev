@@ -56,3 +56,8 @@ tr.example-element-row:hover {
 .example-element-description-attribution {
   opacity: 0.5;
 }
+
+.mat-form-field {
+  font-size: 14px;
+  width: 100%;
+}
