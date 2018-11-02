@@ -3,19 +3,17 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import {SelectionModel} from '@angular/cdk/collections';
 import { GetHelloService } from 'src/app/get-hello/get-hello.service';
 /**
  * @title Table with expandable rows
  */
 @Component({
-  selector: 'app-expanding-table',
-  templateUrl: './expanding-table.component.html',
-  styleUrls: ['./expanding-table.component.css']
+  selector: 'app-project-table',
+  templateUrl: './project-table.component.html',
+  styleUrls: ['./project-table.component.css']
 })
-export class ExpandingTableComponent implements OnInit {
-  displayedColumns: string[] = ['select', 'created', 'state', 'number', 'title'];
-  selection = new SelectionModel<GithubIssue>(true, []);
+export class ProjectTableComponent implements OnInit {
+  displayedColumns: string[] = ['created', 'state', 'number', 'title'];
   exampleDatabase: ExampleHttpDao | null;
   // dataSource: GithubIssue[] = [];
   dataSource = new MatTableDataSource<GithubIssue>([]);
@@ -75,18 +73,8 @@ export class ExpandingTableComponent implements OnInit {
     }
   }
 
-   /** Whether the number of selected elements matches the total number of rows. */
-   isAllSelected() {
-    const numSelected = this.selection.selected.length;
-    const numRows = this.dataSource.data.length;
-    return numSelected === numRows;
-  }
-
-  /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
-    this.isAllSelected() ?
-        this.selection.clear() :
-        this.dataSource.data.forEach(row => this.selection.select(row));
+  selectRow(input: any) {
+    console.log(input);
   }
 }
 

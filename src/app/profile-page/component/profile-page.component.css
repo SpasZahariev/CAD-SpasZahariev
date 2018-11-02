@@ -10,6 +10,7 @@
 }
 
 .left-flexbox{
+  max-width: 60%;
   margin-right: 10px;
   flex-grow: 2;
 }
