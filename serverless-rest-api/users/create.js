@@ -10,17 +10,17 @@ module.exports.create = (event, context, callback) => {
 
     if (typeof data.text !== 'string'){
         console.error('Validation Failed!?');
-        callback(new Error('Can not create this user. Text is not VALIDATABLE :D'));
+        callback(new Error('Can not create this user. Text is not VALIDATABLE'));
         return;
     }
     const params = {
         TableName: 'users',
         Item: {
             id: uuid.v1(),
-            text: data.text,
-            checked: false,
-            createdAt: timestamp,
-            updatedAt: timestamp
+            name: data.name,
+            email: data.email,
+            position: data.position,
+            assignement: data.assignement,
         }
     }
 

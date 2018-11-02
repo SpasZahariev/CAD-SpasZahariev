@@ -10,11 +10,10 @@ export interface HelloAbstract {
 }
 
 export interface UserData {
-  checked: boolean;
-  createdAt: number;
-  text: string;
-  id: string;
-  updatedAt: number;
+  name: string;
+  email: string;
+  position: string;
+  assignment: string;
 }
 
 @Component({

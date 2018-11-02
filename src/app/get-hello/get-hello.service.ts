@@ -25,12 +25,18 @@ export class GetHelloService {
   }
 
   public postUser(userName: string) {
+  //   Item: {
+  //     id: uuid.v1(),
+  //     name: data.name,
+  //     email: data.email,
+  //     position: data.position,
+  //     assignement: data.assignement,
+  // }
     const testUser: UserData = {
-      checked: true,
-      createdAt: 10,
-      text: userName,
-      id: 'this gon get deleted',
-      updatedAt: 12
+      name: userName,
+      email: null,
+      position: null,
+      assignment: null
     };
     this.http.post<UserData>(this.postUserURL, testUser, {
        headers: new HttpHeaders().set('content-type', 'application/json')
