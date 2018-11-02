@@ -7,7 +7,9 @@ import {
   MatIconModule,
   MatCardModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule,
+  MatProgressSpinnerModule,
+  MatPaginatorModule
 } from '@angular/material';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -24,7 +26,9 @@ import { BrowserModule } from '@angular/platform-browser';
     MatIconModule,
     MatCardModule,
     MatSortModule,
-    BrowserModule
+    BrowserModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
   ],
   exports: [
     MatButtonModule,
@@ -36,7 +40,9 @@ import { BrowserModule } from '@angular/platform-browser';
     MatIconModule,
     MatCardModule,
     MatSortModule,
-    BrowserModule
+    BrowserModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
   ]
 })
 export class MaterialModule {}
