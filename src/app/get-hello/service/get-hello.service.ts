@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { HelloAbstract, UserData } from './component/get-hello.component';
+import { HelloAbstract, UserData } from '../component/get-hello.component';
 
 @Injectable({
   providedIn: 'root'
@@ -24,21 +24,14 @@ export class GetHelloService {
     return this.http.get<UserData[]>(this.getUsersURL);
   }
 
-  public postUser(userName: string) {
-  //   Item: {
-  //     id: uuid.v1(),
-  //     name: data.name,
-  //     email: data.email,
-  //     position: data.position,
-  //     assignement: data.assignement,
-  // }
-    const testUser: UserData = {
-      name: userName,
-      email: null,
-      position: null,
-      assignment: null
+  public postUser(name: string, email?: string, position?: string, assignment?: string) {
+    const newUser: UserData = {
+      name: name,
+      email: email,
+      position: position,
+      assignment: assignment
     };
-    this.http.post<UserData>(this.postUserURL, testUser, {
+    this.http.post<UserData>(this.postUserURL, newUser, {
        headers: new HttpHeaders().set('content-type', 'application/json')
       }).subscribe(
       res => console.log('Result: ' + res),

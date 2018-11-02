@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { GetHelloService } from '../get-hello.service';
+import { GetHelloService } from '../service/get-hello.service';
 
 import {MatTableDataSource} from '@angular/material';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
@@ -11,8 +11,8 @@ export interface HelloAbstract {
 
 export interface UserData {
   name: string;
-  email: string;
   position: string;
+  email: string;
   assignment: string;
 }
 
@@ -28,7 +28,7 @@ export class GetHelloComponent implements OnInit {
 
   public users: UserData[] = [];
 
-  public displayedColumns: string[] = ['id', 'checked', 'createdAt', 'text', 'updatedAt'];
+  public displayedColumns: string[] = ['name', 'position', 'email', 'assignment'];
   public dataSource = new MatTableDataSource([]);
 
   public userForm: FormGroup;
@@ -71,11 +71,10 @@ export class GetHelloComponent implements OnInit {
     .subscribe((data) => {
       data.map((element) => {
         this.users.push({
-          checked: element.checked,
-          createdAt: element.createdAt,
-          text: element.text,
-          id: element.id,
-          updatedAt: element.updatedAt,
+          name: element.name,
+          position: element.position,
+          email: element.email,
+          assignment: element.assignment,
         });
         this.dataSource = new MatTableDataSource(this.users);
         // console.log(this.users);

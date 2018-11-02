@@ -5,10 +5,9 @@ const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid');
 
 module.exports.create = (event, context, callback) => {
-    const timestamp = new Date().getTime();
     const data = JSON.parse(event.body);
 
-    if (typeof data.text !== 'string'){
+    if (typeof data.name !== 'string'){
         console.error('Validation Failed!?');
         callback(new Error('Can not create this user. Text is not VALIDATABLE'));
         return;
@@ -20,7 +19,7 @@ module.exports.create = (event, context, callback) => {
             name: data.name,
             email: data.email,
             position: data.position,
-            assignement: data.assignement,
+            assignment: data.assignment,
         }
     }
 

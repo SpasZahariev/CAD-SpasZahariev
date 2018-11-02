@@ -3,7 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { GetHelloService } from 'src/app/get-hello/get-hello.service';
+import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
 /**
  * @title Table with expandable rows
  */
