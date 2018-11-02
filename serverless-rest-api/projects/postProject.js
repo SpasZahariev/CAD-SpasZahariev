@@ -4,24 +4,25 @@ const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 const uuid = require('uuid');
 
-module.exports.create = (event, context, callback) => {
+module.exports.postProject = (event, context, callback) => {
     const data = JSON.parse(event.body);
 
     if (typeof data.name !== 'string'){
         console.error('Validation Failed!?');
-        callback(new Error('Can not create this user. Text is not VALIDATABLE'));
+        callback(new Error('Can not create this project. Text is not VALIDATABLE'));
         return;
     }
     const params = {
-        TableName: 'users',
+        TableName: 'projects',
         Item: {
             id: uuid.v1(),
             name: data.name,
-            email: data.email,
-            position: data.position,
-            assignment: data.assignment,
+            status: data.status,
+            manager: data.manager,
+            developers: data.developers,
         }
     }
+    console.log(params);
 
     dynamoDB.put(params, (error, result) => {
         if (error){

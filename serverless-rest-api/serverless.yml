@@ -81,18 +81,32 @@ functions:
           path: /image-resize
           method: get
           cors: true
-  create:
-    handler: users/create.create
+  postUser:
+    handler: users/postUser.postUser
     events:
       - http:
-          path: users
+          path: /postUser
           method: post
           cors: true
-  returnAll:
-    handler: users/returnAll.returnAll
+  getUsers:
+    handler: users/getUsers.getUsers
     events:
       - http:
-          path: /returnAll
+          path: /getUsers
+          method: get
+          cors: true
+  postProject:
+    handler: projects/postProject.postProject
+    events:
+      - http:
+          path: /postProject
+          method: post
+          cors: true
+  getProjects:
+    handler: projects/getProjects.getProjects
+    events:
+      - http:
+          path: /getProjects
           method: get
           cors: true
 

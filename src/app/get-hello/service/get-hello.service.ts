@@ -9,9 +9,9 @@ import { HelloAbstract, UserData } from '../component/get-hello.component';
 
 export class GetHelloService {
 
-  private testURL = 'https://4ya1z21e38.execute-api.eu-west-1.amazonaws.com/dev/image-resize';
-  private getUsersURL = 'https://4ya1z21e38.execute-api.eu-west-1.amazonaws.com/dev/returnAll';
-  private postUserURL = 'https://4ya1z21e38.execute-api.eu-west-1.amazonaws.com/dev/users';
+  private testURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/image-resize';
+  private getUsersURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/getUsers';
+  private postUserURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/postUser';
 
   constructor(private http: HttpClient) { }
 

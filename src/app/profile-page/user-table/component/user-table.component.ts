@@ -10,7 +10,7 @@ import { UserTableService } from '../service/user-table.service';
  * @title Table with expandable rows
  */
 
-export interface UserData {
+export interface IUserData {
   name: string;
   position: string;
   email: string;
@@ -24,8 +24,8 @@ export interface UserData {
 })
 export class UserTableComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'name', 'position', 'email', 'assignment'];
-  public selection = new SelectionModel<UserData>(true, []);
-  public dataSource = new MatTableDataSource<UserData>([]);
+  public selection = new SelectionModel<IUserData>(true, []);
+  public dataSource = new MatTableDataSource<IUserData>([]);
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 

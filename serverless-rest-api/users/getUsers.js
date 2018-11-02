@@ -3,7 +3,7 @@
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
 
-module.exports.returnAll = (event, context, callback) => {
+module.exports.getUsers = (event, context, callback) => {
     const params = {
         TableName: 'users'
     }
