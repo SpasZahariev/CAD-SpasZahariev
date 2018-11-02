@@ -18,31 +18,26 @@ export interface UserData {
 }
 
 @Component({
-  selector: 'app-expanding-table',
-  templateUrl: './expanding-table.component.html',
-  styleUrls: ['./expanding-table.component.css']
+  selector: 'app-user-table',
+  templateUrl: './user-table.component.html',
+  styleUrls: ['./user-table.component.css']
 })
-export class ExpandingTableComponent implements OnInit {
+export class UserTableComponent implements OnInit {
   public displayedColumns: string[] = ['select', 'name', 'position', 'email', 'assignment'];
   public selection = new SelectionModel<UserData>(true, []);
-  // public exampleDatabase: ExampleHttpDao | null;
   public dataSource = new MatTableDataSource<UserData>([]);
+  @ViewChild(MatPaginator) public paginator: MatPaginator;
+  @ViewChild(MatSort) public sort: MatSort;
 
-  // public resultsLength = 0;
-  // public isLoadingResults = true;
-  // public isRateLimitReached = false;
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort)
-  public sort: MatSort;
-
-  // change to helloService
   constructor(private userTableService: UserTableService) {}
 
   ngOnInit() {
     this.userTableService.getUsers()
-    .subscribe((users) => (this.dataSource = new MatTableDataSource(users)));
-    this.dataSource.paginator = this.paginator;
+    .subscribe((users) => {
+      (this.dataSource = new MatTableDataSource(users));
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+    });
   }
 
   applyFilter(filterValue: string) {
@@ -68,10 +63,6 @@ export class ExpandingTableComponent implements OnInit {
   }
 }
 
-// export interface UserDataApi {
-//   items: UserData[];
-//   total_count: number;
-// }
 
 
 

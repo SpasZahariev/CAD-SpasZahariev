@@ -13,8 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { AuthTestComponent } from './auth-test/component/auth-test.component';
 import { ProfilePageComponent } from './profile-page/component/profile-page.component';
-import { ExpandingTableComponent } from './profile-page/expanding-table/component/expanding-table.component';
 import { ProjectTableComponent } from './profile-page/project-table/component/project-table.component';
+import { UserTableComponent } from './profile-page/user-table/component/user-table.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,7 @@ import { ProjectTableComponent } from './profile-page/project-table/component/pr
     HomeComponent,
     AuthTestComponent,
     ProfilePageComponent,
-    ExpandingTableComponent,
+    UserTableComponent,
     ProjectTableComponent,
   ],
   imports: [
