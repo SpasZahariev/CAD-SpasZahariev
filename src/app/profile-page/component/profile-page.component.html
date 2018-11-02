@@ -2,21 +2,30 @@
 
   <mat-toolbar color="primary">
     <mat-toolbar-row>
+      <mat-icon class="example-icon">favorite</mat-icon>
       <dir class="flexbox-toolbar">
 
       </dir>
       <span>Custom Toolbar</span>
     </mat-toolbar-row>
   </mat-toolbar>
-
 </div>
 
-<div class="table-flexbox">
-  <div class = "left-flexbox">
-    <app-user-table></app-user-table>
+<div class="main-div">
+
+  <div class="table-flexbox">
+    <div class="left-flexbox">
+      <app-user-table></app-user-table>
+    </div>
+
+    <div class="right-flexbox">
+      <app-project-table></app-project-table>
+    </div>
   </div>
 
-  <div class="right-flexbox">
-     <app-project-table></app-project-table>
+  <br>
+
+  <div>
+    <app-project-card></app-project-card>
   </div>
 </div>

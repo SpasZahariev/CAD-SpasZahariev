@@ -1,7 +1,16 @@
+example-icon {
+  padding: 0 14px;
+}
 
+.example-spacer {
+  flex: 1 1 auto;
+}
+
+.main-div {
+  margin: 10px;
+}
 
 .table-flexbox{
-  margin: 10px;
   display:flex;
   flex-direction: row;
   /* flex-flow: wrap; */

@@ -15,6 +15,7 @@ import { AuthTestComponent } from './auth-test/component/auth-test.component';
 import { ProfilePageComponent } from './profile-page/component/profile-page.component';
 import { ProjectTableComponent } from './profile-page/project-table/component/project-table.component';
 import { UserTableComponent } from './profile-page/user-table/component/user-table.component';
+import { ProjectCardComponent } from './profile-page/project-card/component/project-card.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { UserTableComponent } from './profile-page/user-table/component/user-tab
     ProfilePageComponent,
     UserTableComponent,
     ProjectTableComponent,
+    ProjectCardComponent,
   ],
   imports: [
     BrowserModule,

@@ -29,6 +29,7 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatIconModule,
   ],
   exports: [
     MatButtonModule,
@@ -43,6 +44,8 @@ import { BrowserModule } from '@angular/platform-browser';
     BrowserModule,
     MatProgressSpinnerModule,
     MatPaginatorModule,
+    MatIconModule,
+
   ]
 })
 export class MaterialModule {}
