@@ -12,6 +12,10 @@ table {
   font-size: 14pt;
 }
 
+th.mat-sort-header-sorted {
+  color: black;
+}
+
 tr.example-detail-row {
   height: 0;
 }

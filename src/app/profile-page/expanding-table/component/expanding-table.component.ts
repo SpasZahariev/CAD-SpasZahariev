@@ -1,8 +1,7 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { SelectionModel } from '@angular/cdk/collections';
-import { MatTableDataSource } from '@angular/material';
-
+import { MatSort, MatTableDataSource } from '@angular/material';
 /**
  * @title Table with expandable rows
  */
@@ -24,7 +23,10 @@ export class ExpandingTableComponent implements OnInit {
   expandedElement: PeriodicElement;
   selection = new SelectionModel<PeriodicElement>(true, []);
 
+  @ViewChild(MatSort) sort: MatSort;
+
   ngOnInit() {
+    this.dataSource.sort = this.sort;
   }
 }
 

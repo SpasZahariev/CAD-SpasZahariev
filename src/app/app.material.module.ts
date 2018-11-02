@@ -1,7 +1,17 @@
 import { NgModule } from '@angular/core';
-import {MatButtonModule, MatCheckboxModule, MatInputModule, MatToolbarModule, MatIconModule, MatCardModule} from '@angular/material';
-import {MatTableModule} from '@angular/material/table';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatInputModule,
+  MatToolbarModule,
+  MatIconModule,
+  MatCardModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
+
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BrowserModule } from '@angular/platform-browser';
 
 @NgModule({
   imports: [
@@ -13,6 +23,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
+    MatSortModule,
+    BrowserModule
   ],
   exports: [
     MatButtonModule,
@@ -23,7 +35,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     MatToolbarModule,
     MatIconModule,
     MatCardModule,
-  ],
+    MatSortModule,
+    BrowserModule
+  ]
 })
-export class MaterialModule {
-}
+export class MaterialModule {}
