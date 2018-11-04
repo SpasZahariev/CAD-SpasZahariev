@@ -30,7 +30,7 @@
       <mat-card *ngFor="let dev of projectData.developers" style="margin-bottom: 1px">
         <mat-label>{{dev}}</mat-label>
       </mat-card>
-        <button mat-raised-button color="accent">Add Selected Developers</button>
+        <button mat-raised-button color="accent" (click)="addDevs()">Add Selected Developers</button>
         <button mat-raised-button color="accent">Email Assigned</button>
         <button mat-raised-button color="accent">Delete All Assigned</button>
     </div>

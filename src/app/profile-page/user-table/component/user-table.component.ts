@@ -32,7 +32,9 @@ export class UserTableComponent implements OnInit {
 
   constructor(private userTableService: UserTableService) {}
 
+
   ngOnInit() {
+    // get all employees from DynamoDB
     this.userTableService.getUsers()
     .subscribe((users) => {
       (this.dataSource = new MatTableDataSource(users));

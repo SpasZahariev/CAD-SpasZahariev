@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectCardService } from '../service/project-card.service';
 import { IProjectData } from '../../project-table/component/project-table.component';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-project-card',
@@ -20,6 +21,7 @@ export class ProjectCardComponent implements OnInit {
   // public projectName: string;
   // public projectManager: string;
   // public projectStatus: string;
+  public devsRequired: EventEmitter = new EventEmitter();
 
   constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) {
     this.projectGroup = this.formBuilder.group({
@@ -29,7 +31,7 @@ export class ProjectCardComponent implements OnInit {
 
   // listens for clicks on projects and populates fields with their data
   public ngOnInit() {
-    this.projectCardService.change.subscribe(data => {
+    this.projectCardService.projectChanged.subscribe(data => {
       // this.projectId = projectId;
       // this.projectGroup.reset();
       this.projectData = data;
@@ -43,4 +45,8 @@ export class ProjectCardComponent implements OnInit {
     console.log(input);
   }
 
+  public addDevs() {
+    // append selected devs from user table
+    // emit somehow so the userTable pushes the selected users
+  }
 }

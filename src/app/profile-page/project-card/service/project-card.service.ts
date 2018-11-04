@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { IProjectData } from '../../project-table/component/project-table.component';
+import { IUserData } from '../../user-table/component/user-table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,9 @@ export class ProjectCardService {
 
   public projectId = null;
 
-  @Output() change: EventEmitter<IProjectData> = new EventEmitter();
+  @Output() projectChanged: EventEmitter<IProjectData> = new EventEmitter();
+
+  public developers: IUserData[] = [];
   constructor(private http: HttpClient) { }
 
   // public getProjects(): Observable<IProjectData[]> {
@@ -28,7 +31,7 @@ export class ProjectCardService {
     this.http.post<IProjectData>(this.getProjectURL, param, {
        headers: new HttpHeaders().set('content-type', 'application/json')
       }).subscribe(
-      res => this.change.emit(res),
+      res => this.projectChanged.emit(res),
       err => console.log('Error occurred: ' + err.message)
     );
   }
