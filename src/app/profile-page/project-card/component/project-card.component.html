@@ -1,20 +1,20 @@
 <mat-card *ngIf="projectData !== null">
   <div class="project-flexbox">
     <form class="flex-1">
-      <div [formGroup]="projectGroup" (ngSubmit)="onSubmit(projectGroup.value)" class="form">
+      <div [formGroup]="projectGroup" (submit)="onSubmit(projectGroup.value)" class="form">
 
-          <div class="vertical-flexbox">
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Name" value="{{projectData.name}}" formControlName="name" type="text">
+          <div class="vertical-flexbox form-group" >
+            <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
+              <input matInput placeholder="Name" value="{{projectData.name}}" [formControl]="nameForm" type="text">
             </mat-form-field>
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Manager" value="{{projectData.manager}}" formControlName="manager" type="text">
+            <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
+              <input matInput placeholder="Manager" value="{{projectData.manager}}" [formControl]="managerForm" type="text">
             </mat-form-field>
             <mat-form-field>
                 <!-- <input matInput placeholder="Status" value="{{projectData.status}}" formControlName="status" type="text"> -->
 
               <!-- <mat-label>Status</mat-label> -->
-              <mat-select value="{{projectData.status}}" placeholder="Status" formControlName="status">
+              <mat-select value="{{projectData.status}}" placeholder="Status" [formControl]="statusForm">
                 <mat-option value="Pending">Pending</mat-option>
                 <mat-option value="In progress">In progress</mat-option>
                 <mat-option value="Complete">Complete</mat-option>
@@ -23,7 +23,8 @@
           </div>
         </div>
         <button mat-raised-button color="accent" type="submit">Update</button>
-        <button mat-raised-button color="accent" type="submit">Delete</button>
+        <button mat-raised-button color="accent">Add as new Project</button>
+        <button mat-raised-button color="accent">Delete</button>
     </form>
     <div class="flex-2">
       <mat-card *ngFor="let dev of projectData.developers" style="margin-bottom: 1px">

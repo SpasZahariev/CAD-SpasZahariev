@@ -14,18 +14,21 @@ export class ProjectCardComponent implements OnInit {
   public projectData: IProjectData = null;
 
   public projectGroup: FormGroup;
-  // public nameForm: FormControl;
-  // public managerForm: FormControl;
-  // public statusForm: FormControl;
+  public nameForm = new FormControl('', [Validators.required]);
+  public managerForm = new FormControl('', [Validators.required]);
+  public statusForm = new FormControl('', [Validators.required]);
   // public projectName: string;
   // public projectManager: string;
   // public projectStatus: string;
 
-  constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) { }
+  constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) {
+    this.projectGroup = this.formBuilder.group({
+      loatLabel: 'auto',
+    });
+  }
 
   // listens for clicks on projects and populates fields with their data
   public ngOnInit() {
-    this.createForm();
     this.projectCardService.change.subscribe(data => {
       // this.projectId = projectId;
       // this.projectGroup.reset();
@@ -34,18 +37,10 @@ export class ProjectCardComponent implements OnInit {
     });
   }
 
-  private createForm() {
-    this.projectGroup = this.formBuilder.group({
-    name: ['', Validators.required],
-    manager: ['', Validators.required],
-    status: ['', Validators.required],
-    });
-
-  }
-
-  public onSubmit() {
+  public onSubmit(input: any) {
     // var buttonName = document.activeElement.getAttribute("Name");
     // idk
+    console.log(input);
   }
 
 }
