@@ -1,1 +1,21 @@
-<mat-card>project card</mat-card>
+<mat-card *ngIf="projectData !== null">
+  <div>
+    <form >
+      <div [formGroup]="projectGroup" (ngSubmit)="onSubmit(projectGroup.value)" class="form">
+        <div class="vertical-flexbox">
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Name" value="{{projectData.name}}">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Manager" value="{{projectData.manager}}">
+          </mat-form-field>
+          <mat-form-field class="example-full-width">
+            <input matInput placeholder="Status" value="{{projectData.status}}">
+          </mat-form-field>
+        </div>
+
+      </div>
+
+    </form>
+  </div>
+</mat-card>

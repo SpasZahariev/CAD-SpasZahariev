@@ -1,20 +1,23 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Output, HostListener } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
 import { merge, Observable, of as observableOf } from 'rxjs';
 import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ProjectTableService } from '../service/project-table.service';
+import { EventEmitter } from 'protractor';
+import { ProjectCardService } from '../../project-card/service/project-card.service';
 /**
  * @title Table with expandable rows
  */
 
 export interface IProjectData {
+  id: string;
   name: string;
   status: string;
   manager: string;
-  developers: string;
+  developers: string[];
 }
 
 @Component({
@@ -30,7 +33,7 @@ export class ProjectTableComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 
-  constructor(private projectTableService: ProjectTableService) {}
+  constructor(private projectTableService: ProjectTableService, private projectCardService: ProjectCardService) {}
 
   ngOnInit() {
     this.projectTableService.getProjects()
@@ -41,8 +44,11 @@ export class ProjectTableComponent implements OnInit {
     });
   }
 
+
+  // sends the project id to a service that the project Card component is subscribed to
   public highlight(row: any) {
     this.selectedRowIndex = row.id;
+    this.projectCardService.projectSelected(row.id);
   }
 
   public applyFilter(filterValue: string) {

@@ -11,6 +11,7 @@ import { UserTableService } from '../service/user-table.service';
  */
 
 export interface IUserData {
+  id: string;
   name: string;
   position: string;
   email: string;

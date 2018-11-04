@@ -37,6 +37,7 @@ import { ProjectCardComponent } from './profile-page/project-card/component/proj
     FormsModule,
     ReactiveFormsModule,
     AmplifyAngularModule,
+    BrowserModule
   ],
   providers: [
     AmplifyService,
