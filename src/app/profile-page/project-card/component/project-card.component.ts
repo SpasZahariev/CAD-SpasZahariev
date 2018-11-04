@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProjectCardService } from '../service/project-card.service';
 import { IProjectData } from '../../project-table/component/project-table.component';
-import { FormGroup, FormBuilder, FormControl } from '@angular/forms';
+import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-project-card',
@@ -13,7 +13,7 @@ export class ProjectCardComponent implements OnInit {
   public projectId: string = null;
   public projectData: IProjectData = null;
 
-  projectGroup: FormGroup;
+  public projectGroup: FormGroup;
   // public nameForm: FormControl;
   // public managerForm: FormControl;
   // public statusForm: FormControl;
@@ -28,6 +28,7 @@ export class ProjectCardComponent implements OnInit {
     this.createForm();
     this.projectCardService.change.subscribe(data => {
       // this.projectId = projectId;
+      // this.projectGroup.reset();
       this.projectData = data;
       this.projectId = this.projectData.id;
     });
@@ -35,14 +36,15 @@ export class ProjectCardComponent implements OnInit {
 
   private createForm() {
     this.projectGroup = this.formBuilder.group({
-    manager: new FormControl(''),
-    name: new FormControl(''),
-    status: new FormControl(''),
+    name: ['', Validators.required],
+    manager: ['', Validators.required],
+    status: ['', Validators.required],
     });
 
   }
 
   public onSubmit() {
+    // var buttonName = document.activeElement.getAttribute("Name");
     // idk
   }
 

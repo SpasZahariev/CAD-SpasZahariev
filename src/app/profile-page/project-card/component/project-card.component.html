@@ -1,21 +1,37 @@
 <mat-card *ngIf="projectData !== null">
-  <div>
-    <form >
+  <div class="project-flexbox">
+    <form class="flex-1">
       <div [formGroup]="projectGroup" (ngSubmit)="onSubmit(projectGroup.value)" class="form">
-        <div class="vertical-flexbox">
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Name" value="{{projectData.name}}">
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Manager" value="{{projectData.manager}}">
-          </mat-form-field>
-          <mat-form-field class="example-full-width">
-            <input matInput placeholder="Status" value="{{projectData.status}}">
-          </mat-form-field>
+
+          <div class="vertical-flexbox">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Name" value="{{projectData.name}}" formControlName="name" type="text">
+            </mat-form-field>
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Manager" value="{{projectData.manager}}" formControlName="manager" type="text">
+            </mat-form-field>
+            <mat-form-field>
+                <!-- <input matInput placeholder="Status" value="{{projectData.status}}" formControlName="status" type="text"> -->
+
+              <!-- <mat-label>Status</mat-label> -->
+              <mat-select value="{{projectData.status}}" placeholder="Status" formControlName="status">
+                <mat-option value="Pending">Pending</mat-option>
+                <mat-option value="In progress">In progress</mat-option>
+                <mat-option value="Complete">Complete</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
         </div>
-
-      </div>
-
+        <button mat-raised-button color="accent" type="submit">Update</button>
+        <button mat-raised-button color="accent" type="submit">Delete</button>
     </form>
+    <div class="flex-2">
+      <mat-card *ngFor="let dev of projectData.developers" style="margin-bottom: 1px">
+        <mat-label>{{dev}}</mat-label>
+      </mat-card>
+        <button mat-raised-button color="accent">Add Selected Developers</button>
+        <button mat-raised-button color="accent">Email Assigned</button>
+        <button mat-raised-button color="accent">Delete All Assigned</button>
+    </div>
   </div>
 </mat-card>

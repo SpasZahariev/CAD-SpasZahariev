@@ -21,3 +21,16 @@
   display: flex;
   flex-direction: column;
 }
+.project-flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.flex-1 {
+  flex-grow: 1
+}
+.flex-3 {
+  flex-grow: 3
+}
+
