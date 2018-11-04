@@ -1,7 +1,7 @@
 <mat-card *ngIf="projectData !== null">
   <div class="project-flexbox">
-    <form class="flex-1">
-      <div [formGroup]="projectGroup" (submit)="onSubmit(projectGroup.value)" class="form">
+    <form class="form" [formGroup]="projectGroup" (submit)="onSubmit(projectGroup.value)" >
+      <div class="flex-1">
 
           <div class="vertical-flexbox form-group" >
             <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
