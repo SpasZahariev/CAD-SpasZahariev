@@ -8,6 +8,7 @@ import { SelectionModel } from '@angular/cdk/collections';
 import { ProjectTableService } from '../service/project-table.service';
 // import { EventEmitter } from 'protractor';
 import { ProjectCardService } from '../../project-card/service/project-card.service';
+import { IUserData } from '../../user-table/component/user-table.component';
 /**
  * @title Table with expandable rows
  */
@@ -17,7 +18,8 @@ export interface IProjectData {
   name: string;
   status: string;
   manager: string;
-  developers: string[];
+  developers: IUserData[];
+  // developers: string[];
 }
 
 @Component({

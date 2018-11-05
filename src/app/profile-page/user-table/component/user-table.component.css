@@ -68,3 +68,7 @@ tr.example-element-row:hover {
 ::ng-deep .mat-sort-header-arrow {
   color: #FFC107;
 }
+
+.mat-column-select {
+  overflow: initial;
+}

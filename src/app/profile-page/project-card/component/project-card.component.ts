@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ProjectCardService } from '../service/project-card.service';
 import { IProjectData } from '../../project-table/component/project-table.component';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-// import { EventEmitter } from 'protractor';
+import { UserTableComponent } from '../../user-table/component/user-table.component';
+
 
 @Component({
   selector: 'app-project-card',
@@ -21,7 +22,6 @@ export class ProjectCardComponent implements OnInit {
   // public projectName: string;
   // public projectManager: string;
   // public projectStatus: string;
-  // public devsRequired: EventEmitter = new EventEmitter();
 
   constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) {
     this.projectGroup = this.formBuilder.group({
@@ -29,13 +29,21 @@ export class ProjectCardComponent implements OnInit {
     });
   }
 
-  // listens for clicks on projects and populates fields with their data
   public ngOnInit() {
+    // listens for clicks on projects and populates fields with their data
     this.projectCardService.projectChanged.subscribe(data => {
-      // this.projectId = projectId;
-      // this.projectGroup.reset();
       this.projectData = data;
       this.projectId = this.projectData.id;
+    });
+
+    // for adding developers to project
+    this.projectCardService.selectedUsers.subscribe((users) => {
+      // concat wont do the job, fix it
+      console.log(users);
+      // this.projectData.developers.concat(users);
+      this.projectData.developers = users;
+      console.log('Devs post concat: ');
+      console.log(this.projectData.developers);
     });
   }
 
@@ -45,8 +53,9 @@ export class ProjectCardComponent implements OnInit {
     console.log(input);
   }
 
-  public addDevs() {
+  public requestDevs() {
     // append selected devs from user table
     // emit somehow so the userTable pushes the selected users
+    this.projectCardService.requestFromUserTable();
   }
 }

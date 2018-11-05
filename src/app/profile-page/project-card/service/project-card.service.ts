@@ -15,16 +15,14 @@ export class ProjectCardService {
   public projectId = null;
 
   @Output() projectChanged: EventEmitter<IProjectData> = new EventEmitter();
+  @Output() selectedUsers: EventEmitter<IUserData[]> = new EventEmitter();
+  @Output() requestSelectedUsers: EventEmitter<null> = new EventEmitter();
 
   public developers: IUserData[] = [];
   constructor(private http: HttpClient) { }
 
-  // public getProjects(): Observable<IProjectData[]> {
-  //   return this.http.get<IProjectData[]>(this.getProjectsURL);
-  // }
-
   // called when a project is clicked and pipes(emits) to the project Card
-  projectSelected(projectId: string) {
+  public projectSelected(projectId: string) {
     const param = {
       'id': projectId
     };
@@ -34,5 +32,14 @@ export class ProjectCardService {
       res => this.projectChanged.emit(res),
       err => console.log('Error occurred: ' + err.message)
     );
+  }
+
+  // project-card-component listens to changes in selectedusers
+  public appendUsers(users: IUserData[]) {
+    this.selectedUsers.emit(users);
+  }
+
+  public requestFromUserTable() {
+    this.requestSelectedUsers.emit();
   }
 }

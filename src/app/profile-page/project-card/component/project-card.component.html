@@ -28,9 +28,14 @@
     </form>
     <div class="flex-2">
       <mat-card *ngFor="let dev of projectData.developers" style="margin-bottom: 1px">
-        <mat-label>{{dev}}</mat-label>
+        <mat-card-content>
+          <dir style="width:100%">
+            <span style="float:left; width:30%">{{dev.name}}</span>
+            <span style="float:right; width:70%">{{dev.email}}</span>
+          </dir>
+        </mat-card-content>
       </mat-card>
-        <button mat-raised-button color="accent" (click)="addDevs()">Add Selected Developers</button>
+        <button mat-raised-button color="accent" (click)="requestDevs()">Add Selected Developers</button>
         <button mat-raised-button color="accent">Email Assigned</button>
         <button mat-raised-button color="accent">Delete All Assigned</button>
     </div>

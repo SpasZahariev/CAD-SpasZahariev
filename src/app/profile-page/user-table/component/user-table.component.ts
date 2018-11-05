@@ -6,6 +6,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import {SelectionModel} from '@angular/cdk/collections';
 import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
 import { UserTableService } from '../service/user-table.service';
+import { ProjectCardService } from '../../project-card/service/project-card.service';
 /**
  * @title Table with expandable rows
  */
@@ -30,10 +31,11 @@ export class UserTableComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 
-  constructor(private userTableService: UserTableService) {}
+  // public constructor(private userTableService: UserTableService) {}
+  public constructor(private userTableService: UserTableService, private projectCardService: ProjectCardService) {}
 
 
-  ngOnInit() {
+  public ngOnInit() {
     // get all employees from DynamoDB
     this.userTableService.getUsers()
     .subscribe((users) => {
@@ -41,9 +43,14 @@ export class UserTableComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
+
+    // wait for a click to add users to project
+    this.projectCardService.requestSelectedUsers.subscribe(() => {
+      this.assignToProject();
+    });
   }
 
-  applyFilter(filterValue: string) {
+  public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 
     if (this.dataSource.paginator) {
@@ -52,17 +59,27 @@ export class UserTableComponent implements OnInit {
   }
 
    /** Whether the number of selected elements matches the total number of rows. */
-   isAllSelected() {
+   public isAllSelected() {
     const numSelected = this.selection.selected.length;
     const numRows = this.dataSource.data.length;
     return numSelected === numRows;
   }
 
   /** Selects all rows if they are not all selected; otherwise clear selection. */
-  masterToggle() {
+  public masterToggle() {
     this.isAllSelected() ?
         this.selection.clear() :
         this.dataSource.data.forEach(row => this.selection.select(row));
+  }
+
+  // adds users to a project in dynamoDB
+  // project-card-component calls this method
+  public assignToProject() {
+    const selectedDevs: IUserData[] = [];
+    this.selection.selected.forEach((user) => {
+      selectedDevs.push(user);
+    });
+    this.projectCardService.appendUsers(selectedDevs);
   }
 }
 
