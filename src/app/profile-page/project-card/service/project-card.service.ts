@@ -42,4 +42,16 @@ export class ProjectCardService {
   public requestFromUserTable() {
     this.requestSelectedUsers.emit();
   }
+
+  public updateProject(projectData: IProjectData) {
+    // const param = {
+    //   'id': projectId
+    // };
+    // this.http.post<IProjectData>(this.getProjectURL, param, {
+    //    headers: new HttpHeaders().set('content-type', 'application/json')
+    //   }).subscribe(
+    //   res => this.projectChanged.emit(res),
+    //   err => console.log('Error occurred: ' + err.message)
+    // );
+  }
 }

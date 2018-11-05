@@ -1,6 +1,6 @@
 <mat-card *ngIf="projectData !== null">
   <div class="project-flexbox">
-    <form class="form" [formGroup]="projectGroup" (submit)="onSubmit(projectGroup.value)">
+    <form class="form" [formGroup]="projectGroup" (submit)="update()">
       <div class="flex-1">
 
         <div class="vertical-flexbox form-group">
@@ -20,9 +20,9 @@
           </mat-form-field>
         </div>
       </div>
-      <button mat-raised-button color="accent" type="submit">Update</button>
-      <button mat-raised-button color="accent">Add as new Project</button>
-      <button mat-raised-button color="accent">Delete</button>
+      <button mat-raised-button color="accent" [disabled]="isValid()" type="submit">Update</button>
+      <button mat-raised-button color="accent" [disabled]="isValid()">Add as new Project</button>
+      <button mat-raised-button color="accent" [disabled]="isValid()">Delete</button>
     </form>
     <div class="flex-2">
       <div class="overflow-threshhold">
@@ -36,9 +36,9 @@
         </mat-card>
       </div>
 
-      <button mat-raised-button color="accent" (click)="requestDevs()">Add Selected Developers</button>
-      <button mat-raised-button color="accent">Email Assigned</button>
-      <button mat-raised-button color="accent">Delete All Assigned</button>
+      <button mat-raised-button color="primary" (click)="requestDevs()">Add Selected Developers</button>
+      <button mat-raised-button color="primary">Email Assigned</button>
+      <button mat-raised-button color="primary" (click)="clearDevs()">Clear All Assigned</button>
     </div>
   </div>
 </mat-card>
