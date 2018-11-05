@@ -55,19 +55,16 @@ export class ProjectCardComponent implements OnInit {
 
     // for adding developers to project
     this.projectCardService.selectedUsers.subscribe((users) => {
-      // concat wont do the job, fix it
-      console.log('new!');
-      console.log(users);
-      console.log('old!');
-      console.log(this.projectData.developers);
-      // this.projectData.developers.concat(users);
-      users.forEach((user) => this.projectData.developers.push(user));
-      console.log('concated');
-      console.log(this.projectData.developers);
+      const devs = this.projectData.developers;
+      // check and don't add duplicates
+      users.forEach((user) => {
+        // could implement check if user is manager or admin
+        if (devs.indexOf(user) === -1) {
+          this.projectData.developers.push(user);
+          }
+        }
+      );
 
-      // this.projectData.developers = users;
-      // console.log('Devs post concat: ');
-      // console.log(this.projectData.developers);
     });
   }
 
