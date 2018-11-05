@@ -39,8 +39,8 @@ export class ProjectTableComponent implements OnInit {
 
   ngOnInit() {
     this.projectTableService.getProjects()
-    .subscribe((users) => {
-      (this.dataSource = new MatTableDataSource(users));
+    .subscribe((projects) => {
+      (this.dataSource = new MatTableDataSource(projects));
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
