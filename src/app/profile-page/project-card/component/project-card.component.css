@@ -24,7 +24,7 @@
 .project-flexbox {
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
 }
 
 .flex-1 {
@@ -37,5 +37,18 @@
   flex-grow: 5
 }
 
+.overflow-threshhold {
+  max-height: 200px;
+  left: 100%;
+  padding-right : 10px;
+  padding-left : 10px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.dev-list {
+  font-family: -apple-system, 'Open Sans', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
+  margin-top: 1px;
+  margin-bottom: 1px;
+}
 
 

@@ -1,43 +1,44 @@
 <mat-card *ngIf="projectData !== null">
   <div class="project-flexbox">
-    <form class="form" [formGroup]="projectGroup" (submit)="onSubmit(projectGroup.value)" >
+    <form class="form" [formGroup]="projectGroup" (submit)="onSubmit(projectGroup.value)">
       <div class="flex-1">
 
-          <div class="vertical-flexbox form-group" >
-            <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
-              <input matInput placeholder="Name" value="{{projectData.name}}" [formControl]="nameForm" type="text">
-            </mat-form-field>
-            <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
-              <input matInput placeholder="Manager" value="{{projectData.manager}}" [formControl]="managerForm" type="text">
-            </mat-form-field>
-            <mat-form-field>
-                <!-- <input matInput placeholder="Status" value="{{projectData.status}}" formControlName="status" type="text"> -->
-
-              <!-- <mat-label>Status</mat-label> -->
-              <mat-select value="{{projectData.status}}" placeholder="Status" [formControl]="statusForm">
+        <div class="vertical-flexbox form-group">
+          <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
+            <input matInput placeholder="Name" value="{{projectData.name}}" [formControl]="nameForm" type="text">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
+            <input matInput placeholder="Manager" value="{{projectData.manager}}" [formControl]="managerForm" type="text">
+          </mat-form-field>
+          <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
+            <input matInput placeholder="Status" value="{{projectData.status}}" [formControl]="statusForm" type="text">
+            <!-- <mat-select value="{{projectData.status}}" placeholder="Status" [formControl]="statusForm">
                 <mat-option value="Pending">Pending</mat-option>
                 <mat-option value="In progress">In progress</mat-option>
                 <mat-option value="Complete">Complete</mat-option>
-              </mat-select>
-            </mat-form-field>
-          </div>
+              </mat-select> -->
+          </mat-form-field>
         </div>
-        <button mat-raised-button color="accent" type="submit">Update</button>
-        <button mat-raised-button color="accent">Add as new Project</button>
-        <button mat-raised-button color="accent">Delete</button>
+      </div>
+      <button mat-raised-button color="accent" type="submit">Update</button>
+      <button mat-raised-button color="accent">Add as new Project</button>
+      <button mat-raised-button color="accent">Delete</button>
     </form>
     <div class="flex-2">
-      <mat-card *ngFor="let dev of projectData.developers" style="margin-bottom: 1px">
-        <mat-card-content>
-          <dir style="width:100%">
-            <span style="float:left; width:30%">{{dev.name}}</span>
-            <span style="float:right; width:70%">{{dev.email}}</span>
-          </dir>
-        </mat-card-content>
-      </mat-card>
-        <button mat-raised-button color="accent" (click)="requestDevs()">Add Selected Developers</button>
-        <button mat-raised-button color="accent">Email Assigned</button>
-        <button mat-raised-button color="accent">Delete All Assigned</button>
+      <div class="overflow-threshhold">
+        <mat-card *ngFor="let dev of projectData.developers" class="dev-list">
+          <mat-card-content>
+            <dir style="width:100%">
+              <span style="float:left; width:30%">{{dev.name}}</span>
+              <span style="float:right; width:70%">{{dev.email}}</span>
+            </dir>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <button mat-raised-button color="accent" (click)="requestDevs()">Add Selected Developers</button>
+      <button mat-raised-button color="accent">Email Assigned</button>
+      <button mat-raised-button color="accent">Delete All Assigned</button>
     </div>
   </div>
 </mat-card>
