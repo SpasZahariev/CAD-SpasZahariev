@@ -6,7 +6,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
 import { SelectionModel } from '@angular/cdk/collections';
 import { ProjectTableService } from '../service/project-table.service';
-import { EventEmitter } from 'protractor';
+// import { EventEmitter } from 'protractor';
 import { ProjectCardService } from '../../project-card/service/project-card.service';
 /**
  * @title Table with expandable rows

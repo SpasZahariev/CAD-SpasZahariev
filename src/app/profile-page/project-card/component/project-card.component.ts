@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ProjectCardService } from '../service/project-card.service';
 import { IProjectData } from '../../project-table/component/project-table.component';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { EventEmitter } from 'protractor';
+// import { EventEmitter } from 'protractor';
 
 @Component({
   selector: 'app-project-card',
@@ -21,7 +21,7 @@ export class ProjectCardComponent implements OnInit {
   // public projectName: string;
   // public projectManager: string;
   // public projectStatus: string;
-  public devsRequired: EventEmitter = new EventEmitter();
+  // public devsRequired: EventEmitter = new EventEmitter();
 
   constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) {
     this.projectGroup = this.formBuilder.group({
