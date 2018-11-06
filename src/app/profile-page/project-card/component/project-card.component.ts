@@ -67,19 +67,21 @@ export class ProjectCardComponent implements OnInit {
   }
 
   public requestDevs() {
-    // append selected devs from user table
-    // emit somehow so the userTable pushes the selected users
+    // append selected devs from user table component
+    // it will later push the Ticked users to the card
     this.projectCardService.requestFromUserTable();
   }
 
-  // shit I dont want to change their assignment status now
-  // todo change assignment to responsibility and avoid all this
+  // clears all devs from project only on client side
   public clearDevs() {
     this.projectData.developers = [];
   }
 
+  public deleteProject() {
+    this.projectCardService.deleteProjectInDynamo(this.projectData.id);
+  }
+
   public isValid(): boolean {
-    return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid
-    && (!this.nameForm.pristine || !this.managerForm.pristine || !this.statusForm.pristine || this.devsAdded);
+    return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid && this.devsAdded;
   }
 }

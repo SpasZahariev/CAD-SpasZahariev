@@ -9,7 +9,7 @@ import { IUserData } from '../component/user-table.component';
 
 export class UserTableService {
 
-  private getUsersURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/getUsers';
+  private getUsersURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/users/get-all';
 
   constructor(private http: HttpClient) { }
 

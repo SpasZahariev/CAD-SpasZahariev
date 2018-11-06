@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { IProjectData } from '../../project-table/component/project-table.component';
@@ -10,9 +10,10 @@ import { IUserData } from '../../user-table/component/user-table.component';
 
 export class ProjectCardService {
 
-  private getProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/getProject';
-  private postProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/postProject';
-  private updateProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/updateProject';
+  private getProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/projects/get';
+  private postProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/projects/post';
+  private updateProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/projects/update';
+  private deleteProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/projects/delete';
 
   public projectId = null;
 
@@ -53,5 +54,17 @@ export class ProjectCardService {
       res => location.reload(),
       err => console.log('Error occurred: ' + err.message)
     );
+  }
+
+  public deleteProjectInDynamo(projectId: string) {
+    const param = {
+      'id': projectId
+    };
+    this.http.post<IProjectData>(this.deleteProjectURL, param, {
+      headers: new HttpHeaders().set('content-type', 'application/json')
+     }).subscribe(
+     res => location.reload(),
+     err => console.log('Error occurred: ' + err.message)
+   );
   }
 }
