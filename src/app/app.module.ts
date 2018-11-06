@@ -16,6 +16,8 @@ import { ProfilePageComponent } from './profile-page/component/profile-page.comp
 import { ProjectTableComponent } from './profile-page/project-table/component/project-table.component';
 import { UserTableComponent } from './profile-page/user-table/component/user-table.component';
 import { ProjectCardComponent } from './profile-page/project-card/component/project-card.component';
+import { UserPageComponent } from './user-page/component/user-page.component';
+import { ToolbarComponent } from './common/toolbar/component/toolbar.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +29,8 @@ import { ProjectCardComponent } from './profile-page/project-card/component/proj
     UserTableComponent,
     ProjectTableComponent,
     ProjectCardComponent,
+    UserPageComponent,
+    ToolbarComponent,
   ],
   imports: [
     BrowserModule,

@@ -5,6 +5,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { AuthTestComponent } from './auth-test/component/auth-test.component';
 import { ProfilePageComponent } from './profile-page/component/profile-page.component';
+import { UserPageComponent } from './user-page/component/user-page.component';
 
 
 
@@ -14,6 +15,7 @@ const routes: Routes = [
   {path: 'get-hello', component: GetHelloComponent},
   {path: 'auth-test', component: AuthTestComponent},
   {path: 'profile-page', component: ProfilePageComponent},
+  {path: 'user-page', component: UserPageComponent},
 ];
 
 @NgModule({

@@ -11,6 +11,7 @@ import { IUserData } from '../../user-table/component/user-table.component';
 export class ProjectCardService {
 
   private getProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/getProject';
+  private postProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/postProject';
 
   public projectId = null;
 
@@ -44,14 +45,11 @@ export class ProjectCardService {
   }
 
   public updateProject(projectData: IProjectData) {
-    // const param = {
-    //   'id': projectId
-    // };
-    // this.http.post<IProjectData>(this.getProjectURL, param, {
-    //    headers: new HttpHeaders().set('content-type', 'application/json')
-    //   }).subscribe(
-    //   res => this.projectChanged.emit(res),
-    //   err => console.log('Error occurred: ' + err.message)
-    // );
+    this.http.post<IProjectData>(this.postProjectURL, JSON.stringify(projectData), {
+       headers: new HttpHeaders().set('content-type', 'application/json')
+      }).subscribe(
+      res => this.projectChanged.emit(res),
+      err => console.log('Error occurred: ' + err.message)
+    );
   }
 }
