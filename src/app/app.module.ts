@@ -18,6 +18,8 @@ import { UserTableComponent } from './profile-page/user-table/component/user-tab
 import { ProjectCardComponent } from './profile-page/project-card/component/project-card.component';
 import { UserPageComponent } from './user-page/component/user-page.component';
 import { ToolbarComponent } from './common/toolbar/component/toolbar.component';
+import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
+import { UserFormComponent } from './user-page/user-form/component/user-form.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,8 @@ import { ToolbarComponent } from './common/toolbar/component/toolbar.component';
     ProjectCardComponent,
     UserPageComponent,
     ToolbarComponent,
+    UserSelectorComponent,
+    UserFormComponent,
   ],
   imports: [
     BrowserModule,

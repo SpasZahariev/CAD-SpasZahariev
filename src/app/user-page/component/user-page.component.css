@@ -1,0 +1,15 @@
+.user-flexbox {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-1 {
+  flex-grow: 1;
+}
+.flex-3 {
+  flex-grow: 3;
+}
+.flex-5 {
+  flex-grow: 5;
+}
+
