@@ -21,7 +21,7 @@
         </div>
       </div>
       <button mat-raised-button color="accent" [disabled]="isValid()" type="submit">Update</button>
-      <button mat-raised-button color="accent" [disabled]="isValid()">Add as new Project</button>
+      <button mat-raised-button color="accent" [disabled]="isValid()" (click)="addProject()">Add as new Project</button>
       <button mat-raised-button color="accent" [disabled]="isValid()" (click)="deleteProject()">Delete</button>
     </form>
     <div class="flex-2">

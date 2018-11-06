@@ -67,4 +67,13 @@ export class ProjectCardService {
      err => console.log('Error occurred: ' + err.message)
    );
   }
+
+  public postProject(projectData: IProjectData) {
+    this.http.post<IProjectData>(this.postProjectURL, projectData, {
+      headers: new HttpHeaders().set('content-type', 'application/json')
+     }).subscribe(
+     res => location.reload(),
+     err => console.log('Error occurred: ' + err.message)
+   );
+  }
 }

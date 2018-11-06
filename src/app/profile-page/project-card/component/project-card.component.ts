@@ -81,6 +81,10 @@ export class ProjectCardComponent implements OnInit {
     this.projectCardService.deleteProjectInDynamo(this.projectData.id);
   }
 
+  public addProject() {
+    this.projectCardService.postProject(this.projectData);
+  }
+
   public isValid(): boolean {
     return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid && this.devsAdded;
   }
