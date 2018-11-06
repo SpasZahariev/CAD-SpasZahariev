@@ -19,7 +19,6 @@ export interface IProjectData {
   status: string;
   manager: string;
   developers: IUserData[];
-  // developers: string[];
 }
 
 @Component({

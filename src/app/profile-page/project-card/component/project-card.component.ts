@@ -12,21 +12,6 @@ import { forEach } from '@angular/router/src/utils/collection';
   styleUrls: ['./project-card.component.css']
 })
 
-// export class ProjectDev implements IUserData {
-//   id: string;
-//   name: string;
-//   position: string;
-//   email: string;
-//   assignment: string;
-
-//   public constructor(id, name, position, email, assignment) {
-//     this.id = id;
-//     this.name = name;
-//     this.position = position;
-//     this.email = email;
-//     this.assignment = assignment;
-//   }
-// }
 export class ProjectCardComponent implements OnInit {
 
   public projectId: string = null;
@@ -36,9 +21,7 @@ export class ProjectCardComponent implements OnInit {
   public nameForm = new FormControl(null, [Validators.required]);
   public managerForm = new FormControl(null, [Validators.required]);
   public statusForm = new FormControl(null, [Validators.required]);
-  // public projectName: string;
-  // public projectManager: string;
-  // public projectStatus: string;
+  public devsAdded = false;
 
   constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) {
     this.projectGroup = this.formBuilder.group({
@@ -58,12 +41,14 @@ export class ProjectCardComponent implements OnInit {
 
     // for adding developers to project
     this.projectCardService.selectedUsers.subscribe((users) => {
-      const devs = this.projectData.developers;
+      const devEmails = [];
+      this.projectData.developers.forEach((dev) => devEmails.push(dev.email));
       // check and don't add duplicates
       users.forEach((user) => {
         // could implement check if user is manager or admin
-        if (devs.indexOf(user) === -1) {
+        if (devEmails.indexOf(user.email) === -1) {
           this.projectData.developers.push(user);
+          this.devsAdded = true;
           }
         }
       );
@@ -77,6 +62,7 @@ export class ProjectCardComponent implements OnInit {
     // todo check if valid manager
     this.projectData.manager = this.managerForm.value;
     this.projectData.status = this.statusForm.value;
+    this.devsAdded = false;
     this.projectCardService.updateProject(this.projectData);
   }
 
@@ -93,6 +79,7 @@ export class ProjectCardComponent implements OnInit {
   }
 
   public isValid(): boolean {
-    return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid;
+    return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid
+    && (!this.nameForm.pristine || !this.managerForm.pristine || !this.statusForm.pristine || this.devsAdded);
   }
 }

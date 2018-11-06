@@ -50,7 +50,7 @@ export class ProjectCardService {
     this.http.post<IProjectData>(this.updateProjectURL, projectData, {
        headers: new HttpHeaders().set('content-type', 'application/json')
       }).subscribe(
-      res => res,
+      res => location.reload(),
       err => console.log('Error occurred: ' + err.message)
     );
   }
