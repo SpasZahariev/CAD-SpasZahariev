@@ -102,6 +102,13 @@ functions:
           path: /postProject
           method: post
           cors: true
+  updateProject:
+    handler: projects/updateProject.updateProject
+    events:
+      - http:
+          path: /updateProject
+          method: post
+          cors: true
   getProjects:
     handler: projects/getProjects.getProjects
     events:
