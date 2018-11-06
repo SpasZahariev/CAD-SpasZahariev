@@ -12,6 +12,7 @@ export class ProjectCardService {
 
   private getProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/getProject';
   private postProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/postProject';
+  private updateProjectURL = 'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/updateProject';
 
   public projectId = null;
 
@@ -44,11 +45,12 @@ export class ProjectCardService {
     this.requestSelectedUsers.emit();
   }
 
+  // need to reload page when this is successful
   public updateProject(projectData: IProjectData) {
-    this.http.post<IProjectData>(this.postProjectURL, JSON.stringify(projectData), {
+    this.http.post<IProjectData>(this.updateProjectURL, projectData, {
        headers: new HttpHeaders().set('content-type', 'application/json')
       }).subscribe(
-      res => console.log('Lets see' + res),
+      res => res,
       err => console.log('Error occurred: ' + err.message)
     );
   }

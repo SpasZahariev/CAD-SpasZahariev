@@ -9,7 +9,7 @@ module.exports.postProject = (event, context, callback) => {
 
     if (typeof data.name !== 'string'){
         console.error('Validation Failed!?');
-        callback(new Error('Can not create this project. Text is not VALIDATABLE'));
+        callback(new Error('Can not create this project. Text is not VALID'));
         return;
     }
     const params = {

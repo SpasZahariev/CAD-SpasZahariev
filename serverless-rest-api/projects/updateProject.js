@@ -2,20 +2,14 @@
 
 const AWS = require('aws-sdk');
 const dynamoDB = new AWS.DynamoDB.DocumentClient();
-const uuid = require('uuid');
 
 module.exports.updateProject = (event, context, callback) => {
-    // const data = JSON.parse(event.body);
+    const data = JSON.parse(event.body);
 
-    // if (typeof data.name !== 'string'){
-    //     console.error('Validation Failed!?');
-    //     callback(new Error('Can not create this project. Text is not VALIDATABLE'));
-    //     return;
-    // }
-    const params = {
+     const params = {
         TableName: 'projects',
         Key:{
-            "id": "b83bfb00-e1bc-11e8-987e-43971b0d1f3c"
+            "id": data.id
         },
         UpdateExpression: "set #n = :n, #s = :s, #m =:m, #d = :d",
         ExpressionAttributeNames:{
@@ -25,12 +19,13 @@ module.exports.updateProject = (event, context, callback) => {
           "#d": "developers",
         },
         ExpressionAttributeValues:{
-            ":n": "NEW test update NEW",
-            ":s":"Complete",
-            ":m":"Yoyo",
-            ":d":[]
+            ":n":data.name,
+            ":s":data.status,
+            ":m":data.manager,
+            ":d":data.developers
         }
     }
+
     console.log(params);
 
     dynamoDB.update(params, (error, result) => {
