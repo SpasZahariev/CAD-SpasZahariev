@@ -6,6 +6,7 @@ import { catchError, map, startWith, switchMap } from 'rxjs/operators';
 import {SelectionModel} from '@angular/cdk/collections';
 import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
 import { UserTableService } from 'src/app/profile-page/user-table/service/user-table.service';
+import { UserFormService } from '../../user-form/service/user-form.service';
 /**
  * @title Table with expandable rows
  */
@@ -31,7 +32,7 @@ export class UserSelectorComponent implements OnInit {
   @ViewChild(MatSort) public sort: MatSort;
 
   // public constructor(private userTableService: UserTableService) {}
-  public constructor(private userTableService: UserTableService) {}
+  public constructor(private userTableService: UserTableService, private userFormService: UserFormService) {}
 
 
   public ngOnInit() {
@@ -52,6 +53,7 @@ export class UserSelectorComponent implements OnInit {
   // darkens the clicked row
   public highlight(row: any) {
     this.selectedRowIndex = row.id;
+    this.userFormService.userSelected(row.id);
   }
 
   public applyFilter(filterValue: string) {

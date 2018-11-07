@@ -95,6 +95,13 @@ functions:
           path: users/get-all
           method: get
           cors: true
+  getUser:
+    handler: users/getUser.getUser
+    events:
+      - http:
+          path: users/get
+          method: post
+          cors: true
   postProject:
     handler: projects/postProject.postProject
     events:

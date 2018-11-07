@@ -1,5 +1,4 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Injectable, EventEmitter, Output } from '@angular/core';
 import { IProjectData } from '../../project-table/component/project-table.component';
 import { IUserData } from '../../user-table/component/user-table.component';
