@@ -5,51 +5,44 @@
   </mat-card-title>
 
   <mat-card-content>
-    <form>
+    <form [formGroup]="userGroup" (submit)="updateUser()">
       <table>
         <tr>
           <td>
             <mat-form-field class="demo-full-width">
-              <input matInput placeholder="First Name">
-            </mat-form-field>
-          </td>
-          <td>
-            <mat-form-field class="demo-full-width">
-              <input matInput placeholder="Last Name">
-            </mat-form-field>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2">
-            <mat-form-field class="demo-full-width">
-              <input matInput placeholder="Email">
+              <input matInput type="text" placeholder="Name" formControlName="name">
             </mat-form-field>
           </td>
         </tr>
         <tr>
           <td>
-            <mat-radio-group class="vertical-flexbox">
+            <mat-form-field class="demo-full-width">
+              <input matInput type="email" placeholder="Email" formControlName="email">
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <mat-radio-group class="vertical-flexbox" formControlName="position">
               <mat-radio-button value="Admin">Admin</mat-radio-button>
               <mat-radio-button value="Project Manager" style="margin-top: 5px; margin-bottom: 5px;">Project Manager</mat-radio-button>
               <mat-radio-button value="Developer" style="margin-bottom:10px;">Developer</mat-radio-button>
             </mat-radio-group>
           </td>
+        </tr>
+        <tr>
           <td>
             <mat-form-field class="demo-full-width">
-              <input matInput placeholder="Current Task">
+              <input matInput type="text" placeholder="Current Task" formControlName="assignment" maxlength="50" #assignment>
+              <mat-hint align="end">{{assignment.value?.length || 0}}/50</mat-hint>
             </mat-form-field>
           </td>
         </tr>
         <tr>
-          <td>
-
-          </td>
-        </tr>
-        <tr>
-          <td colspan="3" class="content-center">
-            <button mat-raised-button color="accent">Update</button>
-            <button mat-raised-button color="accent">New User</button>
-            <button mat-raised-button color="accent">Delete</button>
+          <td  class="content-center">
+            <button mat-raised-button color="accent" [disabled]="!isFormValid()">Update</button>
+            <button mat-raised-button color="accent" [disabled]="!isFormValid()">New User</button>
+            <button mat-raised-button color="accent" [disabled]="!isFormValid()">Delete</button>
           </td>
         </tr>
       </table>

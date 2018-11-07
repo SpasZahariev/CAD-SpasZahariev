@@ -26,6 +26,7 @@ export interface IUserData {
 export class UserSelectorComponent implements OnInit {
   public displayedColumns: string[] = ['name', 'position', 'email', 'assignment'];
   public dataSource = new MatTableDataSource<IUserData>([]);
+  private selectedRowIndex = -1;
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 
@@ -46,6 +47,11 @@ export class UserSelectorComponent implements OnInit {
     // this.projectCardService.requestSelectedUsers.subscribe(() => {
     //   this.assignToProject();
     // });
+  }
+
+  // darkens the clicked row
+  public highlight(row: any) {
+    this.selectedRowIndex = row.id;
   }
 
   public applyFilter(filterValue: string) {
