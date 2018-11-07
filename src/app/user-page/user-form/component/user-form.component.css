@@ -1,11 +1,40 @@
-/* .main-flexbox {
+.mat-card {
+  text-align: -webkit-center;
+}
+
+.demo-form {
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+}
+
+.demo-full-width {
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, sans-serif;
+}
+
+mat-card {
+  max-width: 80%;
+  margin: 2em auto;
+  text-align: center;
+}
+
+.done {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  color: white;
+}
+
+.content-center {
+  text-align: -webkit-center;
+}
+
+.vertical-flexbox {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  font-family: helvetica, arial, sans;
 }
-.content-container {
-  flex-grow: 1;
-  padding-top: 10vh;
-  height: 100%;
-} */

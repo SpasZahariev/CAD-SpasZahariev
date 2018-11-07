@@ -2,3 +2,12 @@ button {
   font-family: -apple-system, 'Open Sans', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
   font-size: 12pt;
 }
+.toolbar-space {
+  display: flex;
+  align-items: center;
+  width: 100%;
+}
+
+mat-toolbar-row {
+  justify-content: space-between;
+}

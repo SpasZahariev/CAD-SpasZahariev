@@ -10,7 +10,8 @@ import {
   MatTableModule,
   MatProgressSpinnerModule,
   MatPaginatorModule,
-  MatSelectModule
+  MatSelectModule,
+  MatRadioModule
 } from '@angular/material';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,6 +33,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatPaginatorModule,
     MatIconModule,
     MatSelectModule,
+    MatRadioModule,
   ],
   exports: [
     MatButtonModule,
@@ -48,7 +50,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatPaginatorModule,
     MatIconModule,
     MatSelectModule,
-
+    MatRadioModule,
   ]
 })
 export class MaterialModule {}
