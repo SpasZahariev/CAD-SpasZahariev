@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IUserData } from 'src/app/profile-page/user-table/component/user-table.component';
 import { FormGroup, FormBuilder, FormControl, Validators, EmailValidator } from '@angular/forms';
 import { UserFormService } from '../service/user-form.service';
+import { IProjectData } from 'src/app/profile-page/project-table/component/project-table.component';
 
 @Component({
   selector: 'app-user-form',
@@ -11,6 +12,7 @@ import { UserFormService } from '../service/user-form.service';
 export class UserFormComponent implements OnInit {
 
   public userData: IUserData = null;
+  public associatedProjects: IProjectData[] = null;
 
   public userGroup: FormGroup;
 
@@ -34,10 +36,23 @@ export class UserFormComponent implements OnInit {
         assignment: this.userData.assignment
       });
     });
+
+    // listen if the Database has projects this user is working on
+    this.userFormService.projectsReceived.subscribe((projects) => {
+      this.associatedProjects = projects;
+      console.log(this.associatedProjects);
+    });
+  }
+
+  private syncWithForm() {
+    this.userData.name = this.userGroup.value.name;
+    this.userData.email = this.userGroup.value.email;
+    this.userData.position = this.userGroup.value.position;
+    this.userData.assignment = this.userGroup.value.assignment;
   }
 
   public updateUser() {
-    this.getFromForm();
+    this.syncWithForm();
     this.userFormService.updateUser(this.userData);
   }
 
@@ -53,7 +68,6 @@ export class UserFormComponent implements OnInit {
   }
 
   public deleteUser() {
-    this.getFromForm();
     this.userFormService.deleteUser(this.userData.id);
   }
 
@@ -61,18 +75,5 @@ export class UserFormComponent implements OnInit {
     return this.userGroup.valid;
   }
 
-  private getFromForm() {
-    this.userData.name = this.userGroup.value.name;
-    this.userData.email = this.userGroup.value.email;
-    this.userData.position = this.userGroup.value.position;
-    this.userData.assignment = this.userGroup.value.assignment;
-  }
-  // updates the user info with the one in the form and returns it
-  private syncWithForm(user: IUserData): IUserData {
-    user.name = this.userGroup.value.name;
-    user.email = this.userGroup.value.email;
-    user.position = this.userGroup.value.position;
-    user.assignment = this.userGroup.value.assignment;
-    return user;
-  }
+
 }

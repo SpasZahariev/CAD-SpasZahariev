@@ -38,3 +38,10 @@ mat-card {
   display: flex;
   flex-direction: column;
 }
+.better-font {
+  font-family: -apple-system, 'Open Sans', Roboto, Oxygen, Ubuntu, 'Helvetica Neue', sans-serif;
+  font-size: 14pt;
+}
+.full-width {
+  width: 100%;
+}

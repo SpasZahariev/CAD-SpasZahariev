@@ -11,7 +11,8 @@ import {
   MatProgressSpinnerModule,
   MatPaginatorModule,
   MatSelectModule,
-  MatRadioModule
+  MatRadioModule,
+  MatListModule
 } from '@angular/material';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -34,6 +35,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatIconModule,
     MatSelectModule,
     MatRadioModule,
+    MatListModule,
   ],
   exports: [
     MatButtonModule,
@@ -51,6 +53,7 @@ import { BrowserModule } from '@angular/platform-browser';
     MatIconModule,
     MatSelectModule,
     MatRadioModule,
+    MatListModule,
   ]
 })
 export class MaterialModule {}

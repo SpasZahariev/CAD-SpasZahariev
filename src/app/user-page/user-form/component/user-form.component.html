@@ -1,5 +1,4 @@
 <mat-card>
-  <!-- Title of an Card -->
   <mat-card-title>
     User Details
   </mat-card-title>
@@ -33,13 +32,14 @@
         <tr>
           <td>
             <mat-form-field class="demo-full-width">
-              <input matInput type="text" placeholder="Current Task" formControlName="assignment" maxlength="50" #assignment value="{{userGroup.value.assignment}}">
+              <input matInput type="text" placeholder="Current Task" formControlName="assignment" maxlength="50"
+                #assignment value="{{userGroup.value.assignment}}">
               <mat-hint align="end">{{assignment.value?.length || 0}}/50</mat-hint>
             </mat-form-field>
           </td>
         </tr>
         <tr>
-          <td  class="content-center">
+          <td class="content-center">
             <button mat-raised-button color="accent" [disabled]="!isFormValid()" type="submit">Update</button>
             <button mat-raised-button color="accent" [disabled]="!isFormValid()" (click)="newUser()">New User</button>
             <button mat-raised-button color="accent" [disabled]="!isFormValid()" (click)="deleteUser()">Delete</button>
@@ -48,4 +48,25 @@
       </table>
     </form>
   </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="associatedProjects && (associatedProjects.length > 0)">
+  <mat-card-title>
+      User's Projects
+  </mat-card-title>
+  <table class="full-width">
+    <tr *ngFor="let project of associatedProjects">
+      <td>
+        <mat-icon mat-list-icon style="margin-right: 7px; padding-top: 5px;">folder</mat-icon>
+        <span>{{project.name}}</span>
+      </td>
+      <td>
+        <span> {{project.manager}} </span>
+      </td>
+      <td>
+        <span> {{project.status}} </span>
+      </td>
+      <mat-divider></mat-divider>
+    </tr>
+  </table>
 </mat-card>

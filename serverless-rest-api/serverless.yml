@@ -88,6 +88,13 @@ functions:
           path: users/post
           method: post
           cors: true
+  queryByUser:
+    handler: projects/queryByUser.queryByUser
+    events:
+      - http:
+          path: projects/query
+          method: post
+          cors: true
   getUsers:
     handler: users/getUsers.getUsers
     events:
@@ -202,8 +209,8 @@ resources:
           AttributeName: id
           KeyType: HASH
       ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
+        ReadCapacityUnits: 10
+        WriteCapacityUnits: 10
       TableName: 'users'
   ProjectsDynamoDbTable:
     Type: 'AWS::DynamoDB::Table'
@@ -218,8 +225,8 @@ resources:
           AttributeName: id
           KeyType: HASH
       ProvisionedThroughput:
-        ReadCapacityUnits: 1
-        WriteCapacityUnits: 1
+        ReadCapacityUnits: 10
+        WriteCapacityUnits: 10
       TableName: 'projects'
   # CognitoUserPool:
   #   Type: 'AWS::Cognito::UserPool'
