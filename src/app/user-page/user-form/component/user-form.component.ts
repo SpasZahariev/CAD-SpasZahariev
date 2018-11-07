@@ -26,7 +26,6 @@ export class UserFormComponent implements OnInit {
   ngOnInit() {
     // when the survice calls a GET request to DynamoDB, this displays the data
     this.userFormService.userReceived.subscribe((user) => {
-      console.log(user);
       this.userData = user;
       this.userGroup.patchValue({
         name: this.userData.name,
@@ -38,11 +37,42 @@ export class UserFormComponent implements OnInit {
   }
 
   public updateUser() {
-    console.log(this.userGroup.value.email);
+    this.getFromForm();
+    this.userFormService.updateUser(this.userData);
+  }
+
+  public newUser() {
+    const user: IUserData = {
+      id: null,
+      name: this.userGroup.value.name,
+      email: this.userGroup.value.email,
+      position: this.userGroup.value.position,
+      assignment: this.userGroup.value.assignment
+    };
+    this.userFormService.postUser(user);
+  }
+
+  public deleteUser() {
+    this.getFromForm();
+    this.userFormService.deleteUser(this.userData.id);
   }
 
   public isFormValid(): boolean {
     return this.userGroup.valid;
   }
 
+  private getFromForm() {
+    this.userData.name = this.userGroup.value.name;
+    this.userData.email = this.userGroup.value.email;
+    this.userData.position = this.userGroup.value.position;
+    this.userData.assignment = this.userGroup.value.assignment;
+  }
+  // updates the user info with the one in the form and returns it
+  private syncWithForm(user: IUserData): IUserData {
+    user.name = this.userGroup.value.name;
+    user.email = this.userGroup.value.email;
+    user.position = this.userGroup.value.position;
+    user.assignment = this.userGroup.value.assignment;
+    return user;
+  }
 }

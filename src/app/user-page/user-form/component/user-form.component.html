@@ -40,9 +40,9 @@
         </tr>
         <tr>
           <td  class="content-center">
-            <button mat-raised-button color="accent" [disabled]="!isFormValid()">Update</button>
-            <button mat-raised-button color="accent" [disabled]="!isFormValid()">New User</button>
-            <button mat-raised-button color="accent" [disabled]="!isFormValid()">Delete</button>
+            <button mat-raised-button color="accent" [disabled]="!isFormValid()" type="submit">Update</button>
+            <button mat-raised-button color="accent" [disabled]="!isFormValid()" (click)="newUser()">New User</button>
+            <button mat-raised-button color="accent" [disabled]="!isFormValid()" (click)="deleteUser()">Delete</button>
           </td>
         </tr>
       </table>

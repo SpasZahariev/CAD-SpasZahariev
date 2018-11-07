@@ -102,6 +102,20 @@ functions:
           path: users/get
           method: post
           cors: true
+  deleteUser:
+    handler: users/deleteUser.deleteUser
+    events:
+      - http:
+          path: users/delete
+          method: post
+          cors: true
+  updateUser:
+    handler: users/updateUser.updateUser
+    events:
+      - http:
+          path: users/update
+          method: post
+          cors: true
   postProject:
     handler: projects/postProject.postProject
     events:
