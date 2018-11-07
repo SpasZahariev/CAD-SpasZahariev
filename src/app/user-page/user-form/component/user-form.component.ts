@@ -40,7 +40,6 @@ export class UserFormComponent implements OnInit {
     // listen if the Database has projects this user is working on
     this.userFormService.projectsReceived.subscribe((projects) => {
       this.associatedProjects = projects;
-      console.log(this.associatedProjects);
     });
   }
 

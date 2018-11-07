@@ -52,12 +52,24 @@
 
 <mat-card *ngIf="associatedProjects && (associatedProjects.length > 0)">
   <mat-card-title>
-      User's Projects
+    User's Projects
   </mat-card-title>
   <table class="full-width">
+    <tr align="left">
+      <th>
+        <span>Name</span>
+      </th>
+      <th>
+        <span>Manager</span>
+      </th>
+      <th>
+        <span>Status</span>
+      </th>
+      <mat-divider></mat-divider>
+    </tr>
     <tr *ngFor="let project of associatedProjects">
       <td>
-        <mat-icon mat-list-icon style="margin-right: 7px; padding-top: 5px;">folder</mat-icon>
+        <mat-icon mat-list-icon style="margin-right: 7px; padding-top: 5px;">label_important</mat-icon>
         <span>{{project.name}}</span>
       </td>
       <td>
