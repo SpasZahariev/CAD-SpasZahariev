@@ -1,33 +1,35 @@
 {
 	"providers": {
 		"awscloudformation": {
-			"AuthRoleName": "pasahariev-20181031214817-authRole",
-			"UnauthRoleArn": "arn:aws:iam::001076823091:role/pasahariev-20181031214817-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::001076823091:role/pasahariev-20181031214817-authRole",
+			"AuthRoleName": "pasahariev-20181107230030-authRole",
+			"UnauthRoleArn": "arn:aws:iam::001076823091:role/pasahariev-20181107230030-unauthRole",
+			"AuthRoleArn": "arn:aws:iam::001076823091:role/pasahariev-20181107230030-authRole",
 			"Region": "eu-west-1",
-			"DeploymentBucketName": "pasahariev-20181031214817-deployment",
-			"UnauthRoleName": "pasahariev-20181031214817-unauthRole",
-			"StackName": "pasahariev-20181031214817",
-			"StackId": "arn:aws:cloudformation:eu-west-1:001076823091:stack/pasahariev-20181031214817/4d17c0b0-dd4e-11e8-a6a0-50a686335cd2"
+			"DeploymentBucketName": "pasahariev-20181107230030-deployment",
+			"UnauthRoleName": "pasahariev-20181107230030-unauthRole",
+			"StackName": "pasahariev-20181107230030",
+			"StackId": "arn:aws:cloudformation:eu-west-1:001076823091:stack/pasahariev-20181107230030/ed0f6180-e2e0-11e8-896a-500c3d3c2c9a"
 		}
 	},
 	"auth": {
-		"cognitoWest1": {
+		"cadWest1": {
 			"service": "Cognito",
 			"providerPlugin": "awscloudformation",
 			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/pasahariev-20181031214817-deployment/amplify-cfn-templates/auth/cognitoWest1-cloudformation-template.yml",
-				"logicalId": "authcognitoWest1"
+				"s3TemplateURL": "https://s3.amazonaws.com/pasahariev-20181107230030-deployment/amplify-cfn-templates/auth/cadWest1-cloudformation-template.yml",
+				"logicalId": "authcadWest1"
 			},
-			"lastPushTimeStamp": "2018-10-31T20:53:58.710Z",
+			"lastPushTimeStamp": "2018-11-07T23:16:15.614Z",
 			"output": {
-				"AppClientSecret": "i4vfjm4pelt19o1kd8clg30c02ffar9f9k7a51s8h31monfp4re",
-				"UserPoolId": "eu-west-1_l1YmrmqdF",
-				"AppClientIDWeb": "vgoho2ard1sjel1613g8lt2k6",
-				"AppClientID": "60cl4uevi21b8l3f8lrhn91dom",
-				"UserPoolName": "cad-userpool"
+				"AppClientSecret": "ns0h5kbvv6ob9j8gr89be9hi26a19857bbdsgib7ksoppj94jcm",
+				"UserPoolId": "eu-west-1_zO51xo8Ei",
+				"AppClientIDWeb": "3cusot5nkhc4903h49m36rp2rr",
+				"AppClientID": "228rjebq3f6plcuf5l20hcui7t",
+				"IdentityPoolId": "eu-west-1:2d5233ea-8d81-4ff1-a5fd-167cdc698e31",
+				"IdentityPoolName": "cad_identity_pool",
+				"UserPoolName": "cad_user_pool"
 			},
-			"lastPushDirHash": "c6+e/jFK3akLjPkJamjLAjrjvF4="
+			"lastPushDirHash": "NSF2K46ECCiSmW6K+2/Pc6YsCxs="
 		}
 	}
 }
