@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthorizationService } from 'src/app/common/services/authorization.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login-page',
@@ -23,7 +24,10 @@ export class LoginPageComponent implements OnInit {
   public isRegistering = false;
   public showErrorMessage = false;
 
-  constructor(private formBuilder: FormBuilder, private auth: AuthorizationService, private router: Router) {
+  constructor(private formBuilder: FormBuilder,
+    private auth: AuthorizationService,
+    private router: Router,
+    private cookieService: CookieService) {
     this.userGroup = this.formBuilder.group({
       email: new FormControl(null, [Validators.required, Validators.email]),
       password: new FormControl(null, [Validators.required])
@@ -47,6 +51,11 @@ export class LoginPageComponent implements OnInit {
     }
     this.auth.signIn(email, password).subscribe(
     (data) => {
+      const token = data.getAccessToken().getJwtToken();
+      // const expiration = Date.now();
+      // const expiration = someDate.setHours(someDate.getHours()+1);
+      this.cookieService.set('userCookie', token);
+
       this.showErrorMessage = false;
       this.router.navigateByUrl('/user-page');
     },
@@ -80,8 +89,10 @@ export class LoginPageComponent implements OnInit {
     console.log(code);
     this.auth.confirmAuthCode(code).subscribe(
     (data) => {
+      // now to login normally
       this.showErrorMessage = false;
-      this.router.navigateByUrl('/user-page');
+      this.isCodeSent = false;
+      this.isRegistering = false;
     },
     (err) => {
       this.showErrorMessage = true;

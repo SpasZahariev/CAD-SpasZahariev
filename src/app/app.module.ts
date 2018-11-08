@@ -18,6 +18,8 @@ import { LoginPageComponent } from './login-page/component/login-page.component'
 import { UserPageComponent } from './user-page/component/user-page.component';
 import { UserFormComponent } from './user-page/user-form/component/user-form.component';
 import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
+import { CookieService } from 'ngx-cookie-service';
+
 
 
 @NgModule({
@@ -47,6 +49,7 @@ import { UserSelectorComponent } from './user-page/user-selector/component/user-
   ],
   providers: [
     AuthorizationService,
+    CookieService,
   ],
   bootstrap: [AppComponent]
 })

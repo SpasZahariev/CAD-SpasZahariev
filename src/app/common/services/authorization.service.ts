@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
+import {
+  AuthenticationDetails,
+  CognitoUser,
+  CognitoUserPool
+} from 'amazon-cognito-identity-js';
 import { Observable } from 'rxjs';
 
 const poolData = {
@@ -12,7 +16,6 @@ const userPool = new CognitoUserPool(poolData);
 @Injectable()
 export class AuthorizationService {
   public cognitoUser: any;
-
   constructor() {}
 
   // adding a new user to pool
@@ -70,11 +73,12 @@ export class AuthorizationService {
       Username: email,
       Pool: userPool
     };
+    // different to doc
     const cognitoUser = new CognitoUser(userData);
-
     return Observable.create(observer => {
       cognitoUser.authenticateUser(authenticationDetails, {
         onSuccess: function(result) {
+
           // pushes one item into the observable and stops posting
           observer.next(result);
           observer.complete();
