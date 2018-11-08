@@ -55,11 +55,16 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  public registerForm() {
+    this.isRegistering = true;
+    this.showErrorMessage = false;
+  }
+
   // check if fields are alright and send to cognito
   public register() {
     const email = this.regGroup.value.regEmail;
     const password = this.regGroup.value.regPassword;
-    const repeatPassword = this.regGroup.value.repeatPassword;
+    const repeatPassword = this.regGroup.value.regRepeatPassword;
     if (password !== repeatPassword || this.regGroup.invalid) {
       this.showErrorMessage = true;
       return;

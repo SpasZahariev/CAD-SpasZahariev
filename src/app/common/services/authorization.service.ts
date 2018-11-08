@@ -59,7 +59,7 @@ export class AuthorizationService {
   }
 
   // handle signIn form
-  signIn(email, password) {
+  public signIn(email, password) {
     const authenticationData = {
       Username: email,
       Password: password
@@ -87,16 +87,16 @@ export class AuthorizationService {
     });
   }
 
-  isLoggedIn() {
+  public isLoggedIn() {
     return userPool.getCurrentUser() != null;
   }
 
-  getAuthenticatedUser() {
+  public getAuthenticatedUser() {
     // gets the current user from the local storage
     return userPool.getCurrentUser();
   }
 
-  logOut() {
+  public logOut() {
     this.getAuthenticatedUser().signOut();
     this.cognitoUser = null;
   }
