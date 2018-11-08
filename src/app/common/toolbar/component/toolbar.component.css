@@ -11,3 +11,7 @@ button {
 mat-toolbar-row {
   justify-content: space-between;
 }
+
+button:hover {
+  background: #455A64;
+}

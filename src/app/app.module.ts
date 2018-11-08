@@ -10,7 +10,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AmplifyAngularModule, AmplifyService } from 'aws-amplify-angular';
 import { AuthTestComponent } from './auth-test/component/auth-test.component';
 import { ProfilePageComponent } from './profile-page/component/profile-page.component';
 import { ProjectTableComponent } from './profile-page/project-table/component/project-table.component';
@@ -20,6 +19,7 @@ import { UserPageComponent } from './user-page/component/user-page.component';
 import { ToolbarComponent } from './common/toolbar/component/toolbar.component';
 import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
 import { UserFormComponent } from './user-page/user-form/component/user-form.component';
+import { AuthorizationService } from './common/services/authorization.service';
 
 @NgModule({
   declarations: [
@@ -44,11 +44,10 @@ import { UserFormComponent } from './user-page/user-form/component/user-form.com
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AmplifyAngularModule,
     BrowserModule
   ],
   providers: [
-    AmplifyService,
+    AuthorizationService,
   ],
   bootstrap: [AppComponent]
 })

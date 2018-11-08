@@ -1,6 +1,97 @@
-<amplify-authenticator framework="Angular">
+<!-- <amplify-authenticator framework="Angular">
   <p>
     auth-test works!
   </p>
-</amplify-authenticator>
+</amplify-authenticator> -->
 
+<div class="centered" *ngIf="!isRegistering">
+  <mat-card>
+    <mat-card-title align="center">
+      Sign In
+    </mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="userGroup">
+        <table>
+          <tr>
+            <td>
+              <mat-form-field class="demo-full-width">
+                <input matInput type="email" placeholder="Email" formControlName="email">
+                <mat-error *ngIf="showErrorMessage">Invalid user credentials</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="demo-full-width">
+                <input matInput type="password" placeholder="Password" formControlName="password">
+                <mat-error *ngIf="showErrorMessage">Invalid user credentials</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td class="content-center">
+              <button mat-raised-button color="accent" (click)="login()">Log in</button>
+              <span style="margin-left: 10px"></span>
+              <button mat-raised-button color="accent" (click)="isRegistering = true; showErrorMessage = false;">Register</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+
+<div class="centered" *ngIf="isRegistering">
+  <mat-card>
+    <mat-card-title align="center">
+      Register
+    </mat-card-title>
+
+    <mat-card-content>
+      <form [formGroup]="regGroup" (submit)="register()">
+        <table>
+          <tr>
+            <td>
+              <mat-form-field class="demo-full-width">
+                <input matInput type="email" placeholder="Email" formControlName="regEmail">
+                <mat-error *ngIf="showErrorMessage">Invalid user credentials</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="demo-full-width">
+                <input matInput type="password" placeholder="Password" formControlName="regPassword">
+                <mat-error *ngIf="showErrorMessage">Invalid user credentials</mat-error>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              <mat-form-field class="demo-full-width">
+                <input matInput type="password" placeholder="Repeat Password" formControlName="regRepeatPassword">
+                <mat-hint *ngIf="showErrorMessage" color="accent">Invalid user credentials</mat-hint>
+              </mat-form-field>
+            </td>
+          </tr>
+          <tr>
+            <td class="content-center">
+              <button mat-raised-button color="accent" type="submit">Register</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </mat-card-content>
+  </mat-card>
+  <br>
+  <mat-card *ngIf="isCodeSent">
+    <mat-form-field>
+      <input matInput type="text" placeholder="Authentication Code" [formControl]="authCode">
+      <mat-error *ngIf="showErrorMessage">Invalid Code Entered</mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="accent" (click)="submitCode()">Submit Code</button>
+  </mat-card>
+</div>
