@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IUserData } from '../component/user-table.component';
+import { IUserData } from 'src/app/common/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserData } from 'src/app/profile-page/user-table/component/user-table.component';
-import { FormGroup, FormBuilder, FormControl, Validators, EmailValidator } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { IProjectData, IUserData } from 'src/app/common/interfaces/interfaces';
 import { UserFormService } from '../service/user-form.service';
-import { IProjectData } from 'src/app/profile-page/project-table/component/project-table.component';
 
 @Component({
   selector: 'app-user-form',

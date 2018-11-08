@@ -1,25 +1,9 @@
-import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild, Output, HostListener } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
 import { SelectionModel } from '@angular/cdk/collections';
-import { ProjectTableService } from '../service/project-table.service';
-// import { EventEmitter } from 'protractor';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
+import { IProjectData } from 'src/app/common/interfaces/interfaces';
 import { ProjectCardService } from '../../project-card/service/project-card.service';
-import { IUserData } from '../../user-table/component/user-table.component';
-/**
- * @title Table with expandable rows
- */
-
-export interface IProjectData {
-  id: string;
-  name: string;
-  status: string;
-  manager: string;
-  developers: IUserData[];
-}
+import { ProjectTableService } from '../service/project-table.service';
 
 @Component({
   selector: 'app-project-table',

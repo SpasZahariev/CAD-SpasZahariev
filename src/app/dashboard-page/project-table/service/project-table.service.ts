@@ -1,7 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProjectData } from '../component/project-table.component';
+import { IProjectData } from 'src/app/common/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'

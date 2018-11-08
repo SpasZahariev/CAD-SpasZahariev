@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AuthenticationDetails,
-  CognitoUser,
-  CognitoUserPool
-} from 'amazon-cognito-identity-js';
+import { AuthenticationDetails, CognitoUser, CognitoUserPool } from 'amazon-cognito-identity-js';
 import { Observable } from 'rxjs';
 
 const poolData = {

@@ -1,7 +1,6 @@
-import { Injectable, EventEmitter, Output } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
-import { IUserData } from 'src/app/profile-page/user-table/component/user-table.component';
-import { IProjectData } from 'src/app/profile-page/project-table/component/project-table.component';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { EventEmitter, Injectable, Output } from '@angular/core';
+import { IProjectData, IUserData } from 'src/app/common/interfaces/interfaces';
 
 @Injectable({
   providedIn: 'root'

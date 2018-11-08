@@ -1,9 +1,7 @@
-import { Component, OnInit, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProjectCardService } from '../service/project-card.service';
-import { IProjectData } from '../../project-table/component/project-table.component';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { UserTableComponent, IUserData } from '../../user-table/component/user-table.component';
-import { forEach } from '@angular/router/src/utils/collection';
+import { IProjectData } from 'src/app/common/interfaces/interfaces';
 
 
 @Component({

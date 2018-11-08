@@ -1,32 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { AuthorizationService } from 'src/app/common/services/authorization.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthorizationService } from 'src/app/common/services/authorization.service';
 
 @Component({
-  selector: 'app-auth-test',
-  templateUrl: './auth-test.component.html',
-  styleUrls: ['./auth-test.component.css']
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css']
 })
-export class AuthTestComponent implements OnInit {
+export class LoginPageComponent implements OnInit {
   signedIn: boolean;
   user: any;
   greeting: string;
 
-
-  // constructor(private amplifyService: AmplifyService) {
-
-  //   this.amplifyService.authStateChange$.subscribe(authState => {
-  //     this.signedIn = authState.state === 'signedIn';
-  //     if (!authState.user) {
-  //       this.user = null;
-  //     } else {
-  //       this.user = authState.user;
-  //       this.greeting = 'Hola amigo ' + this.user.username;
-  //     }
-  //   });
-
-  // }
 
   public userGroup: FormGroup;
   public regGroup: FormGroup;
@@ -83,6 +69,7 @@ export class AuthTestComponent implements OnInit {
     });
   }
 
+  // sending verification code to cognito
   public submitCode() {
     const code = this.authCode.value;
     console.log(code);

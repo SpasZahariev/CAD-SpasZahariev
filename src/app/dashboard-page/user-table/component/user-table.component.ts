@@ -1,23 +1,9 @@
-import { HttpClient } from '@angular/common/http';
+import { SelectionModel } from '@angular/cdk/collections';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatSort, MatTableDataSource } from '@angular/material';
-import { merge, Observable, of as observableOf } from 'rxjs';
-import { catchError, map, startWith, switchMap } from 'rxjs/operators';
-import {SelectionModel} from '@angular/cdk/collections';
-import { GetHelloService } from 'src/app/get-hello/service/get-hello.service';
-import { UserTableService } from '../service/user-table.service';
+import { IUserData } from 'src/app/common/interfaces/interfaces';
 import { ProjectCardService } from '../../project-card/service/project-card.service';
-/**
- * @title Table with expandable rows
- */
-
-export interface IUserData {
-  id: string;
-  name: string;
-  position: string;
-  email: string;
-  assignment: string;
-}
+import { UserTableService } from '../service/user-table.service';
 
 @Component({
   selector: 'app-user-table',
