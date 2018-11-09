@@ -16,6 +16,7 @@ const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
   {path: 'dashboard-page', component: DashboardPageComponent},
   {path: 'user-page', component: UserPageComponent},
+  {path: 'video', component: HomeComponent},
 ];
 
 @NgModule({
