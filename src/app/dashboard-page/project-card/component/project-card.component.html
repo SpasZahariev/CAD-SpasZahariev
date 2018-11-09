@@ -15,9 +15,11 @@
           </mat-form-field>
         </div>
       </div>
-      <button mat-raised-button color="accent" [disabled]="isValid()" type="submit">Update</button>
-      <button mat-raised-button color="accent" [disabled]="isValid()" (click)="addProject()">Add as new Project</button>
-      <button mat-raised-button color="accent" [disabled]="isValid()" (click)="deleteProject()">Delete</button>
+      <div *ngIf="isManager()">
+        <button mat-raised-button color="accent" [disabled]="isValid()" type="submit">Update</button>
+        <button mat-raised-button color="accent" [disabled]="isValid()" (click)="addProject()" type="button">Add as new Project</button>
+        <button mat-raised-button color="accent" [disabled]="isValid()" (click)="deleteProject()" type="button">Delete</button>
+      </div>
     </form>
     <div class="flex-2">
       <div class="overflow-threshhold">
@@ -31,9 +33,11 @@
         </mat-card>
       </div>
 
-      <button mat-raised-button color="primary" (click)="requestDevs()">Add Selected Developers</button>
-      <button mat-raised-button color="primary">Email Assigned</button>
-      <button mat-raised-button color="primary" (click)="clearDevs()">Clear All Assigned</button>
+      <div *ngIf="isManager()">
+        <button mat-raised-button color="primary" (click)="requestDevs()">Add Selected Developers</button>
+        <button mat-raised-button color="primary">Email Assigned</button>
+        <button mat-raised-button color="primary" (click)="clearDevs()">Clear All Assigned</button>
+      </div>
     </div>
   </div>
 </mat-card>

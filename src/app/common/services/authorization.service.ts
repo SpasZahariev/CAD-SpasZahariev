@@ -44,7 +44,6 @@ export class AuthorizationService {
         }
 
         this.cognitoUser = result.user;
-        console.log('signUp success', result);
         // pushes one item into the observable and stops posting
         // cool async way
         observer.next(result);
@@ -66,7 +65,6 @@ export class AuthorizationService {
           console.log(err);
           observer.error(err);
         }
-        console.log('confirmAuthCode() success', result);
         // pushes one item into the observable and stops posting
         observer.next(result);
         // the observable is returned but it could be empty in the start and then receive the userData

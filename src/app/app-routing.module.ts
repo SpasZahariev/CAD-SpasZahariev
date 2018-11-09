@@ -11,7 +11,7 @@ import { DashboardPageComponent } from './dashboard-page/component/dashboard-pag
 
 const routes: Routes = [
   // {path: '', redirectTo: '/get-hello', pathMatch: 'full' },
-  {path: '', component: HomeComponent},
+  {path: '', component: LoginPageComponent},
   {path: 'get-hello', component: GetHelloComponent},
   {path: 'login-page', component: LoginPageComponent},
   {path: 'dashboard-page', component: DashboardPageComponent},

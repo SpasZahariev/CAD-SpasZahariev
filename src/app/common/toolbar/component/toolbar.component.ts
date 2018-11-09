@@ -15,12 +15,6 @@ export class ToolbarComponent implements OnInit {
   ngOnInit() {
   }
 
-  public wut() {
-    console.log(this.cookieService.get('userCookie'));
-    console.log(this.cookieService.get('accessCookie'));
-    console.log(JSON.parse(this.cookieService.get('accessCookie')));
-  }
-
   public signOut() {
     this.router.navigateByUrl('/login-page');
     this.cookieService.deleteAll();

@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ProjectCardService } from '../service/project-card.service';
-import { IProjectData } from 'src/app/common/interfaces/interfaces';
+import { IProjectData, IAccessCookie } from 'src/app/common/interfaces/interfaces';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -21,7 +22,10 @@ export class ProjectCardComponent implements OnInit {
   public statusForm = new FormControl(null, [Validators.required]);
   public devsAdded = false;
 
-  constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder) {
+  private cookie: IAccessCookie = null;
+  private isCookieSet = false;
+
+  constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder, private cookieService: CookieService) {
     this.projectGroup = this.formBuilder.group({
       loatLabel: 'auto',
     });
@@ -35,29 +39,49 @@ export class ProjectCardComponent implements OnInit {
       this.managerForm.setValue(this.projectData.manager);
       this.statusForm.setValue(this.projectData.status);
       this.projectId = this.projectData.id;
+      if (!this.isCookieSet) {
+        this.cookie = JSON.parse(this.cookieService.get('accessCookie'));
+        this.isCookieSet = true;
+      }
+      this.adjustForms();
     });
 
     // for adding developers to project
     this.projectCardService.selectedUsers.subscribe((users) => {
       const devEmails = [];
       this.projectData.developers.forEach((dev) => devEmails.push(dev.email));
-      // check and don't add duplicates
+      // checks and does not add duplicates
       users.forEach((user) => {
-        // could implement check if user is manager or admin
         if (devEmails.indexOf(user.email) === -1) {
           this.projectData.developers.push(user);
           this.devsAdded = true;
           }
         }
       );
-
     });
+  }
+
+  // enable or disable form controls depending on user position
+  private adjustForms() {
+    if (this.isManager()) {
+      this.nameForm.enable();
+      this.managerForm.enable();
+      this.statusForm.enable();
+    } else {
+      this.nameForm.disable();
+      this.managerForm.disable();
+      this.statusForm.disable();
+    }
+  }
+
+  // admin should be like a super user with access to everything
+  public isManager(): boolean {
+    return (this.cookie.position === 'Manager') || (this.cookie.position === 'Admin');
   }
 
   // posts changes to DynamoDB
   public update() {
     this.projectData.name = this.nameForm.value;
-    // todo check if valid manager
     this.projectData.manager = this.managerForm.value;
     this.projectData.status = this.statusForm.value;
     this.devsAdded = false;
