@@ -17,6 +17,8 @@ export class ToolbarComponent implements OnInit {
 
   public wut() {
     console.log(this.cookieService.get('userCookie'));
+    console.log(this.cookieService.get('accessCookie'));
+    console.log(JSON.parse(this.cookieService.get('accessCookie')));
   }
 
   public signOut() {

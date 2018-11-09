@@ -105,8 +105,8 @@ export class UserFormService {
       .subscribe(
         res => {
           const cookie: IAccessCookie = {
-            email: res.email,
-            position: res.position
+            email: res[0].email,
+            position: res[0].position
           };
           this.cookieService.set('accessCookie', JSON.stringify(cookie));
         },

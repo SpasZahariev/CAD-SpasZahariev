@@ -1,7 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { IProjectData, IUserData } from 'src/app/common/interfaces/interfaces';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators
+} from '@angular/forms';
+import {
+  IProjectData,
+  IUserData,
+  IAccessCookie
+} from 'src/app/common/interfaces/interfaces';
 import { UserFormService } from '../service/user-form.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-user-form',
@@ -9,24 +19,30 @@ import { UserFormService } from '../service/user-form.service';
   styleUrls: ['./user-form.component.css']
 })
 export class UserFormComponent implements OnInit {
-
   public userData: IUserData = null;
   public associatedProjects: IProjectData[] = null;
 
   public userGroup: FormGroup;
+  public cookie: IAccessCookie = null;
+  public isAdmin = false;
+  public usedCookie = false;
 
-  constructor(private formBuilder: FormBuilder, private userFormService: UserFormService) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private userFormService: UserFormService,
+    private cookieService: CookieService
+  ) {
     this.userGroup = this.formBuilder.group({
       name: new FormControl(null, [Validators.required]),
       email: new FormControl(null, [Validators.required, Validators.email]),
       position: new FormControl(null, [Validators.required]),
       assignment: new FormControl(null, [Validators.required])
     });
-   }
+  }
 
   ngOnInit() {
     // when the survice calls a GET request to DynamoDB, this displays the data
-    this.userFormService.userReceived.subscribe((user) => {
+    this.userFormService.userReceived.subscribe(user => {
       this.userData = user;
       this.userGroup.patchValue({
         name: this.userData.name,
@@ -34,19 +50,62 @@ export class UserFormComponent implements OnInit {
         position: this.userData.position,
         assignment: this.userData.assignment
       });
+      // check if the cookie has been assigned
+      if (!this.usedCookie) {
+        this.getCookie();
+      }
+      this.adjustPermissions();
     });
 
     // listen if the Database has projects this user is working on
-    this.userFormService.projectsReceived.subscribe((projects) => {
+    this.userFormService.projectsReceived.subscribe(projects => {
       this.associatedProjects = projects;
     });
   }
+
+  private getCookie() {
+    this.cookie = JSON.parse(this.cookieService.get('accessCookie'));
+    if (this.cookie.position === 'Admin') {
+      this.isAdmin = true;
+    }
+  }
+
+  // sets form inputs to enabled/disabled
+  private adjustPermissions() {
+    this.userGroup.controls.name.disable();
+    this.userGroup.controls.email.disable();
+    this.userGroup.controls.position.disable();
+    this.userGroup.controls.assignment.disable();
+
+    if (this.isUser()) {
+      this.userGroup.controls.name.enable();
+      this.userGroup.controls.email.enable();
+      this.userGroup.controls.assignment.enable();
+    }
+    if (this.isManager()) {
+      this.userGroup.controls.assignment.enable();
+    }
+    if (this.isAdmin) {
+      this.userGroup.controls.position.enable();
+    }
+  }
+
+
 
   private syncWithForm() {
     this.userData.name = this.userGroup.value.name;
     this.userData.email = this.userGroup.value.email;
     this.userData.position = this.userGroup.value.position;
     this.userData.assignment = this.userGroup.value.assignment;
+  }
+
+  // check if selected user is the one that is logged in
+  private isUser(): boolean {
+    return (this.cookie.email === this.userData.email) || this.isAdmin;
+  }
+  // checks if logged in user is a project manager
+  private isManager(): boolean {
+    return (this.cookie.position === 'Project Manager') || this.isAdmin;
   }
 
   public updateUser() {
@@ -72,6 +131,4 @@ export class UserFormComponent implements OnInit {
   public isFormValid(): boolean {
     return this.userGroup.valid;
   }
-
-
 }

@@ -8,8 +8,8 @@
       <table>
         <tr>
           <td>
-            <mat-form-field class="demo-full-width">
-              <input matInput type="text" placeholder="Name" formControlName="name" value="{{userGroup.value.name}}">
+            <mat-form-field class="demo-full-width" >
+              <input matInput type="text" placeholder="Name" formControlName="name" value="{{userGroup.value.name}}" >
             </mat-form-field>
           </td>
         </tr>
@@ -41,8 +41,8 @@
         <tr>
           <td class="content-center">
             <button mat-raised-button color="accent" [disabled]="!isFormValid()" type="submit">Update</button>
-            <button mat-raised-button color="accent" [disabled]="!isFormValid()" (click)="newUser()">New User</button>
-            <button mat-raised-button color="accent" [disabled]="!isFormValid()" (click)="deleteUser()">Delete</button>
+            <button mat-raised-button color="accent" *ngIf="isAdmin" [disabled]="!isFormValid()" (click)="newUser()" type="button">New User</button>
+            <button mat-raised-button color="accent" *ngIf="isAdmin" [disabled]="!isFormValid()" (click)="deleteUser()" type="button">Delete</button>
           </td>
         </tr>
       </table>
