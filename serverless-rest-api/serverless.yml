@@ -123,6 +123,13 @@ functions:
           path: users/update
           method: post
           cors: true
+  queryByEmail:
+    handler: users/queryByEmail.queryByEmail
+    events:
+      - http:
+          path: users/queryByEmail
+          method: post
+          cors: true
   postProject:
     handler: projects/postProject.postProject
     events:

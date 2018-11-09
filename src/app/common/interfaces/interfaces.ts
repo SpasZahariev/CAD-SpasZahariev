@@ -13,3 +13,8 @@ export interface IUserData {
   email: string;
   assignment: string;
 }
+
+export interface IAccessCookie {
+  email: string;
+  position: string;
+}
