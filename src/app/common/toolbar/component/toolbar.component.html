@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="isSignedIn()">
 
   <mat-toolbar color="primary">
     <mat-toolbar-row>
@@ -7,7 +7,7 @@
       <a routerLink="/user-page"><button mat-flat-button class="btn btn-success pull-right">Edit Users</button></a>
       <span class="toolbar-space"></span>
       <button mat-flat-button class="btn btn-success pull-right" (click)="wut()" >wut</button>
-      <a routerLink="/login-page"><button mat-flat-button class="btn btn-success pull-right" >Sign out</button></a>
+      <button mat-flat-button class="btn btn-success pull-right" (click)="signOut()">Sign out</button>
     </mat-toolbar-row>
   </mat-toolbar>
 </div>

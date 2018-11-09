@@ -11,7 +11,7 @@
     </mat-card-title>
 
     <mat-card-content>
-      <form [formGroup]="userGroup" (submit)="registerForm()">
+      <form [formGroup]="userGroup" (submit)="login()">
         <table>
           <tr>
             <td>
@@ -31,9 +31,9 @@
           </tr>
           <tr>
             <td class="content-center">
-              <button mat-raised-button color="accent" (click)="login()">Log in</button>
+              <button mat-raised-button color="accent" type="submit" >Log in</button>
               <span style="margin-left: 10px"></span>
-              <button mat-raised-button color="accent" type="submit">Register</button>
+              <button mat-raised-button color="accent" type="button" (click)="registerForm()">Register</button>
             </td>
           </tr>
         </table>

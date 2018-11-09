@@ -64,6 +64,7 @@ export class LoginPageComponent implements OnInit {
     });
   }
 
+  // user decided to register instead of logging in
   public registerForm() {
     this.isRegistering = true;
     this.showErrorMessage = false;
@@ -86,7 +87,6 @@ export class LoginPageComponent implements OnInit {
   // sending verification code to cognito
   public submitCode() {
     const code = this.authCode.value;
-    console.log(code);
     this.auth.confirmAuthCode(code).subscribe(
     (data) => {
       // now to login normally
