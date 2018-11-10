@@ -76,7 +76,7 @@ export class ProjectCardComponent implements OnInit {
 
   // admin should be like a super user with access to everything
   public isManager(): boolean {
-    return (this.cookie.position === 'Manager') || (this.cookie.position === 'Admin');
+    return (this.cookie.position === 'Project Manager') || (this.cookie.position === 'Admin');
   }
 
   // posts changes to DynamoDB
