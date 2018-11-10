@@ -1,22 +1,37 @@
 import { Injectable } from '@angular/core';
+import { IMessage } from '../interfaces/interfaces';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+// import { MailService } from '@sendgrid/mail';
 
-const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(
-  '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'
-);
+// const sgMail = MailService;
 
-@Injectable()
+
+@Injectable({
+  providedIn: 'root'
+})
 export class SendEmailService {
 
+  private postEmailURL =
+    'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/users/postEmail';
+
+  constructor (private http: HttpClient) {}
+
   // sending an email message to multiple addresses using SendGrid
-  public sendMultiple(emails: string[], content: string) {
-    const msg = {
-      to: 'spaszahariev54@gmail.com',
-      from: 'spas.zah@gmail.com',
-      subject: 'Cloud Application Development',
-      text: 'hi, hoping this works - spas z.',
-      html: content
+  public sendMultiple(recipients: string[], sender: string, text: string) {
+
+    const params = {
+      recipients: recipients,
+      sender: sender,
+      text: text
     };
-    sgMail.sendMultiple(msg);
+
+      this.http
+      .post(this.postEmailURL, params, {
+        headers: new HttpHeaders().set('content-type', 'application/json')
+      })
+      .subscribe(
+        res => location.reload(),
+        err => console.log('Error occurred: ' + err.message)
+      );
   }
 }
