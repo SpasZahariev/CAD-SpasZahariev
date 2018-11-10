@@ -4,6 +4,7 @@ import { DashboardPageComponent } from './dashboard-page/component/dashboard-pag
 import { LoginPageComponent } from './login-page/component/login-page.component';
 import { UserPageComponent } from './user-page/component/user-page.component';
 import { AuthGuardService } from './common/services/auth-guard.service';
+import { EmailPageComponent } from './email-page/component/email-page.component';
 
 
 
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'login-page', component: LoginPageComponent},
   {path: 'dashboard-page', component: DashboardPageComponent, canActivate: [AuthGuardService]},
   {path: 'user-page', component: UserPageComponent, canActivate: [AuthGuardService]},
+  {path: 'email-page', component: EmailPageComponent, canActivate: [AuthGuardService]},
   {path: '**', redirectTo: '' }
 ];
 

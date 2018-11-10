@@ -1,9 +1,10 @@
 <div class="container" *ngIf="isSignedIn()">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
-      <mat-icon style="margin-right:20px;">favorite</mat-icon>
+      <a routerLink="/dashboard-page"><mat-icon style="margin-right:20px;">favorite</mat-icon></a>
       <a routerLink="/dashboard-page"><button mat-flat-button class="btn btn-success pull-right">Dashboard</button></a>
       <a routerLink="/user-page"><button mat-flat-button class="btn btn-success pull-right">User Info</button></a>
+      <a routerLink="/email-page"><button mat-flat-button class="btn btn-success pull-right">Send Email</button></a>
       <span class="toolbar-space"></span>
       <button mat-flat-button class="btn btn-success pull-right" (click)="signOut()">Sign out</button>
     </mat-toolbar-row>

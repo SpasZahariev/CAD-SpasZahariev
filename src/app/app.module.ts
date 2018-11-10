@@ -3,24 +3,25 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { CookieService } from 'ngx-cookie-service';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MaterialModule } from './app.material.module';
+import { AuthGuardService } from './common/services/auth-guard.service';
 import { AuthorizationService } from './common/services/authorization.service';
 import { ToolbarComponent } from './common/toolbar/component/toolbar.component';
 import { DashboardPageComponent } from './dashboard-page/component/dashboard-page.component';
 import { ProjectCardComponent } from './dashboard-page/project-card/component/project-card.component';
 import { ProjectTableComponent } from './dashboard-page/project-table/component/project-table.component';
 import { UserTableComponent } from './dashboard-page/user-table/component/user-table.component';
+import { EmailPageComponent } from './email-page/component/email-page.component';
 import { GetHelloComponent } from './get-hello/component/get-hello.component';
 import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/component/login-page.component';
 import { UserPageComponent } from './user-page/component/user-page.component';
 import { UserFormComponent } from './user-page/user-form/component/user-form.component';
 import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
-import { CookieService } from 'ngx-cookie-service';
-import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
-import { AuthGuardService } from './common/services/auth-guard.service';
 
 const JWT_Module_Options: JwtModuleOptions = {
   config: {
@@ -46,6 +47,7 @@ const JWT_Module_Options: JwtModuleOptions = {
     ToolbarComponent,
     UserSelectorComponent,
     UserFormComponent,
+    EmailPageComponent,
   ],
   imports: [
     BrowserModule,
