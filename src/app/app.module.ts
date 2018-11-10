@@ -19,7 +19,17 @@ import { UserPageComponent } from './user-page/component/user-page.component';
 import { UserFormComponent } from './user-page/user-form/component/user-form.component';
 import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
 import { CookieService } from 'ngx-cookie-service';
+import { JwtHelperService, JwtModule, JwtModuleOptions } from '@auth0/angular-jwt';
+import { AuthGuardService } from './common/services/auth-guard.service';
 
+const JWT_Module_Options: JwtModuleOptions = {
+  config: {
+      tokenGetter: () => {
+        return localStorage.getItem('userCookie');
+      },
+      whitelistedDomains: []
+  }
+};
 
 
 @NgModule({
@@ -45,11 +55,13 @@ import { CookieService } from 'ngx-cookie-service';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule
+    BrowserModule,
+    JwtModule.forRoot(JWT_Module_Options)
   ],
   providers: [
     AuthorizationService,
     CookieService,
+    AuthGuardService
   ],
   bootstrap: [AppComponent]
 })
