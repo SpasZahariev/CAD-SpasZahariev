@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { IAccessCookie, IProjectData } from 'src/app/common/interfaces/interfaces';
 import { ProjectCardService } from '../service/project-card.service';
+import { SendEmailService } from 'src/app/common/services/send-email.service';
 
 
 @Component({
@@ -22,6 +23,8 @@ export class ProjectCardComponent implements OnInit {
   public managerForm = new FormControl(null, [Validators.required]);
   public statusForm = new FormControl(null, [Validators.required]);
   public devsAdded = false;
+  // new members are sent an email to notify them that they are added to a project
+  private newProjectMembers: string[] = [];
 
   private cookie: IAccessCookie = null;
   private isCookieSet = false;
@@ -30,7 +33,8 @@ export class ProjectCardComponent implements OnInit {
     private projectCardService: ProjectCardService,
     private formBuilder: FormBuilder,
     private cookieService: CookieService,
-    private router: Router) {
+    private router: Router,
+    private sendEmailService: SendEmailService) {
     this.projectGroup = this.formBuilder.group({
       loatLabel: 'auto',
     });
@@ -53,12 +57,16 @@ export class ProjectCardComponent implements OnInit {
 
     // for adding developers to project
     this.projectCardService.selectedUsers.subscribe((users) => {
+
+      // reset the list of new members
+      this.newProjectMembers = [];
       const devEmails = [];
       this.projectData.developers.forEach((dev) => devEmails.push(dev.email));
       // checks and does not add duplicates
       users.forEach((user) => {
         if (devEmails.indexOf(user.email) === -1) {
           this.projectData.developers.push(user);
+          this.newProjectMembers.push(user.email);
           this.devsAdded = true;
           }
         }
@@ -79,16 +87,25 @@ export class ProjectCardComponent implements OnInit {
     }
   }
 
+  // set the local Project Data to the form field values
+  private syncWithForms() {
+    this.projectData.name = this.nameForm.value;
+    this.projectData.manager = this.managerForm.value;
+    this.projectData.status = this.statusForm.value;
+  }
+
   // admin should be like a super user with access to everything
   public isManager(): boolean {
     return (this.cookie.position === 'Project Manager') || (this.cookie.position === 'Admin');
   }
 
-  // posts changes to DynamoDB
+  // posts changes to DynamoDB and emails new members
   public update() {
-    this.projectData.name = this.nameForm.value;
-    this.projectData.manager = this.managerForm.value;
-    this.projectData.status = this.statusForm.value;
+    this.syncWithForms();
+    if (this.devsAdded && this.newProjectMembers.length > 0) {
+      const message: string = 'you have been added to project: ' + this.projectData.name;
+      this.sendEmailService.sendMultiple(this.newProjectMembers, this.projectData.manager, message);
+    }
     this.devsAdded = false;
     this.projectCardService.updateProject(this.projectData);
   }
@@ -109,6 +126,7 @@ export class ProjectCardComponent implements OnInit {
   }
 
   public addProject() {
+    this.syncWithForms();
     this.projectCardService.postProject(this.projectData);
   }
 
@@ -116,7 +134,7 @@ export class ProjectCardComponent implements OnInit {
     return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid && this.devsAdded;
   }
 
-  // sends emails ev all listed empliyees in a project and sends them an email
+  // sends emails of all listed empliyees in a project and sends them to email-page
   public emailAssigned() {
     if (this.projectData.developers.length === 0) {
       return;
@@ -125,7 +143,6 @@ export class ProjectCardComponent implements OnInit {
     this.projectData.developers.map((dev) => {
       emails.push(dev.email);
     });
-    console.log(emails);    //            delete laterrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
     localStorage.setItem('emails', JSON.stringify(emails));
     this.router.navigate(['/', 'email-page']);
   }

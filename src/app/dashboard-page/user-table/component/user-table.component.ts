@@ -17,7 +17,6 @@ export class UserTableComponent implements OnInit {
   @ViewChild(MatPaginator) public paginator: MatPaginator;
   @ViewChild(MatSort) public sort: MatSort;
 
-  // public constructor(private userTableService: UserTableService) {}
   public constructor(private userTableService: UserTableService, private projectCardService: ProjectCardService) {}
 
 

@@ -36,6 +36,7 @@ export class ProjectTableComponent implements OnInit {
     this.projectCardService.projectSelected(row.id);
   }
 
+  // filter table date based on filterValue
   public applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
 

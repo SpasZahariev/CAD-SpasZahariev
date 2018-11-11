@@ -5,7 +5,6 @@ import { FormControl } from '@angular/forms';
 import { IMessage, IAccessCookie } from 'src/app/common/interfaces/interfaces';
 import { SendEmailService } from 'src/app/common/services/send-email.service';
 import { CookieService } from 'ngx-cookie-service';
-import { ProjectCardComponent } from 'src/app/dashboard-page/project-card/component/project-card.component';
 
 @Component({
   selector: 'app-email-page',
@@ -71,6 +70,7 @@ export class EmailPageComponent implements OnInit {
       const sender = cookie.email;
 
       this.emailService.sendMultiple(recipients, sender, text);
+      this.textForm.setValue('');
     }
   }
 }

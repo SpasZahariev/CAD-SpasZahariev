@@ -1,9 +1,6 @@
-import { Injectable } from '@angular/core';
-import { IMessage } from '../interfaces/interfaces';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-// import { MailService } from '@sendgrid/mail';
+import { Injectable } from '@angular/core';
 
-// const sgMail = MailService;
 
 
 @Injectable({
@@ -30,7 +27,7 @@ export class SendEmailService {
         headers: new HttpHeaders().set('content-type', 'application/json')
       })
       .subscribe(
-        res => location.reload(),
+        res => console.log('email successfully sent'),
         err => console.log('Error occurred: ' + err.message)
       );
   }

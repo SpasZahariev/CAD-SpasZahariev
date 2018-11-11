@@ -114,7 +114,7 @@ export class UserFormService {
       );
   }
 
-  // after user is fetched, get the projects associated with this user
+  // queries the user table for entries with this email => there should be only one user with this email
   public queryUsersByEmail(userEmail: string) {
     const param = {
       email: userEmail
@@ -125,13 +125,22 @@ export class UserFormService {
       })
       .subscribe(
         res => {
-          const cookie: IAccessCookie = {
-            email: res[0].email,
-            position: res[0].position
-          };
-          this.cookieService.set('accessCookie', JSON.stringify(cookie));
+          this.setAccessCookie(res[0]);
         },
         err => console.log('Error occurred while fetching userData: ' + err.message)
       );
+  }
+
+  private setAccessCookie(userData: IUserData) {
+    const cookie: IAccessCookie = {
+      email: userData.email,
+      position: userData.position
+    };
+    const expiredDate = new Date();
+    expiredDate.setDate( expiredDate.getDate() + 10 );
+    if (this.cookieService.get('accessCookie')) {
+      return;
+    }
+    this.cookieService.set('accessCookie', JSON.stringify(cookie), expiredDate);
   }
 }

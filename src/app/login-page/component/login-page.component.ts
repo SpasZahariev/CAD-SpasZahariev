@@ -54,6 +54,15 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit() {}
 
+  private setUserCookie(token) {
+    const expiredDate = new Date();
+    expiredDate.setDate( expiredDate.getDate() + 10 );
+    if (this.cookieService.get('userCookie')) {
+      return;
+    }
+    this.cookieService.set('userCookie', token, expiredDate);
+  }
+
   public login() {
     const email = this.userGroup.value.email;
     const password = this.userGroup.value.password;
@@ -71,7 +80,7 @@ export class LoginPageComponent implements OnInit {
         // set the cookies
         const token = data.getAccessToken().getJwtToken();
         this.userFormService.queryUsersByEmail(email);
-        this.cookieService.set('userCookie', token);
+        this.setUserCookie(token);
 
         this.showErrorMessage = false;
         this.router.navigateByUrl('/user-page');

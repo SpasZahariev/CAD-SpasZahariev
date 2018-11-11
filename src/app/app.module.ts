@@ -16,7 +16,6 @@ import { ProjectCardComponent } from './dashboard-page/project-card/component/pr
 import { ProjectTableComponent } from './dashboard-page/project-table/component/project-table.component';
 import { UserTableComponent } from './dashboard-page/user-table/component/user-table.component';
 import { EmailPageComponent } from './email-page/component/email-page.component';
-import { HomeComponent } from './home/home.component';
 import { LoginPageComponent } from './login-page/component/login-page.component';
 import { UserPageComponent } from './user-page/component/user-page.component';
 import { UserFormComponent } from './user-page/user-form/component/user-form.component';
@@ -30,7 +29,6 @@ export function tokenGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     LoginPageComponent,
     DashboardPageComponent,
     UserTableComponent,

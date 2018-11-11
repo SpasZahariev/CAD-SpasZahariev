@@ -95,9 +95,6 @@ export class AuthorizationService {
           delete userAttributes.email_verified;
 
           observer.next('newPasswordRequired');
-
-          // Get these details and call
-          // cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this);
       }
       });
     });
