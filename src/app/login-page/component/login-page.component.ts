@@ -126,7 +126,6 @@ export class LoginPageComponent implements OnInit {
     const userAttributes = {
       email: this.userEmail
     };
-    console.log(userAttributes);
     this.auth
       .changeTempPassword(this.userEmail, password, userAttributes)
       .subscribe(
@@ -136,7 +135,7 @@ export class LoginPageComponent implements OnInit {
             password: ''
           });
           this.forceChangePassword = false;
-          this.postDefaultUserToDynamoDB();
+          this.postDefaultUserToDynamoDB(true);
         },
         err => {
           console.log(err);
@@ -146,7 +145,7 @@ export class LoginPageComponent implements OnInit {
   }
 
   // creates a default user ITEM in Dynamo when users are registering (or login after admin adds them)
-  private postDefaultUserToDynamoDB() {
+  private postDefaultUserToDynamoDB(stopReload?: boolean) {
     // create new user entry in DynamoDB
     // tempName is just email with everything before @gmail.com
     const tempName = this.userEmail.substring(0, this.userEmail.indexOf('@'));
@@ -157,6 +156,6 @@ export class LoginPageComponent implements OnInit {
       email: this.userEmail,
       assignment: 'Unassigned'
     };
-    this.userFormService.postUser(user);
+    this.userFormService.postUser(user, stopReload);
   }
 }

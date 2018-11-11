@@ -32,6 +32,15 @@ provider:
         - dynamodb:UpdateItem
         - dynamodb:DeleteItem
       Resource: "arn:aws:dynamodb:eu-west-1:*:*"
+    - Effect: Allow
+      Action:
+      - cognito-sync:*
+      - cognito-identity:*
+      Resource: arn:aws:cognito-identity:eu-west-1:*:*
+    - Effect: Allow
+      Action:
+      - cognito-idp:*
+      Resource: arn:aws:cognito-idp:eu-west-1:*:*
 
 # you can overwrite defaults here
 #  stage: dev
@@ -86,6 +95,13 @@ functions:
     events:
       - http:
           path: users/post
+          method: post
+          cors: true
+  postToCognito:
+    handler: users/postToCognito.postToCognito
+    events:
+      - http:
+          path: users/postToCognito
           method: post
           cors: true
   queryByUser:

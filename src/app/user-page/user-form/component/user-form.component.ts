@@ -53,6 +53,7 @@ export class UserFormComponent implements OnInit {
       // check if the cookie has been assigned
       if (!this.usedCookie) {
         this.getCookie();
+        this.usedCookie = true;
       }
       this.adjustPermissions();
     });
@@ -104,8 +105,12 @@ export class UserFormComponent implements OnInit {
     return (this.cookie.email === this.userData.email) || this.isAdmin;
   }
   // checks if logged in user is a project manager
-  private isManager(): boolean {
-    return (this.cookie.position === 'Project Manager') || this.isAdmin;
+  public isManager(): boolean {
+    // we find out if our user is the manager when we use the cookie
+    if (this.usedCookie) {
+      return (this.cookie.position === 'Project Manager') || this.isAdmin;
+    }
+    return false;
   }
 
   public updateUser() {

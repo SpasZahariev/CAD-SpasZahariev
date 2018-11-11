@@ -19,6 +19,8 @@ export class UserFormService {
     'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/projects/query';
   private queryByEmailURL =
     'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/users/queryByEmail';
+  private postToCognitoURL =
+    'https://b7z59sf105.execute-api.eu-west-1.amazonaws.com/dev/users/postToCognito';
 
   @Output() userReceived: EventEmitter<IUserData> = new EventEmitter();
   @Output() projectsReceived: EventEmitter<IProjectData> = new EventEmitter();
@@ -68,13 +70,32 @@ export class UserFormService {
       );
   }
 
-  public postUser(userData: IUserData) {
+  // if a stopReload parameter is given && true don't reload
+  public postUser(userData: IUserData, stopReload?: boolean) {
+    const emailParam = {
+      email: userData.email
+    };
+    // creating user entry in Cognito User Pool
+    this.http
+      .post(this.postToCognitoURL, emailParam, {
+        headers: new HttpHeaders().set('content-type', 'application/json')
+      })
+      .subscribe(
+        res => console.log(res),
+        err => console.log('Error occurred: ' + err.message)
+      );
+    // creating user entry in DynamoDB
     this.http
       .post<IUserData>(this.postUserURL, userData, {
         headers: new HttpHeaders().set('content-type', 'application/json')
       })
       .subscribe(
-        res => location.reload(),
+        res => {
+          if (stopReload) {
+            return;
+          }
+          location.reload();
+        },
         err => console.log('Error occurred: ' + err.message)
       );
   }

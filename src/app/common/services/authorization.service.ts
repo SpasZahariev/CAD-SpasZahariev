@@ -78,7 +78,6 @@ export class AuthorizationService {
         onSuccess: function(result) {
 
           // pushes one item into the observable and stops posting
-          console.log(result);
           observer.next(result);
           observer.complete();
         },
@@ -106,12 +105,7 @@ export class AuthorizationService {
 
   // if the temporary password is changed successfully => call the signIn method with it
   public changeTempPassword(email, newPassword, userAttributes) {
-    console.log(userAttributes);
-    // const userData = {
-    //   Username: email,
-    //   Pool: userPool
-    // };
-    // const cognitoUser = new CognitoUser(userData);
+
     return Observable.create(observer => {
       this.cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, {
         onSuccess: function(result) {

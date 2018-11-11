@@ -13,9 +13,8 @@ example-icon {
 .table-flexbox{
   display:flex;
   flex-direction: row;
-  /* flex-flow: wrap; */
-  /* justify-content: space-between; */
   align-items: stretch;
+  flex-wrap: wrap;
 }
 
 .left-flexbox{
@@ -25,7 +24,6 @@ example-icon {
 }
 
 .right-flexbox{
-  /* flex-grow: 1; */
   flex-grow: 0.7;
 }
 

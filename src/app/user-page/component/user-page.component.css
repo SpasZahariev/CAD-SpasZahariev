@@ -1,10 +1,14 @@
 .user-flexbox {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .flex-1 {
   flex-grow: 1;
+}
+.flex-2 {
+  flex-grow: 2;
 }
 .flex-3 {
   flex-grow: 3;
@@ -13,3 +17,8 @@
   flex-grow: 5;
 }
 
+.main-container {
+  margin-top: 5%;
+  margin-left: auto;
+  margin-right: auto;
+}

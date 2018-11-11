@@ -41,7 +41,7 @@
         <tr>
           <td class="content-center">
             <button mat-raised-button color="accent" [disabled]="!isFormValid()" type="submit">Update</button>
-            <button mat-raised-button color="accent" *ngIf="isAdmin" [disabled]="!isFormValid()" (click)="newUser()" type="button">New User</button>
+            <button mat-raised-button color="accent" *ngIf="isManager()" [disabled]="!isFormValid()" (click)="newUser()" type="button">New User</button>
             <button mat-raised-button color="accent" *ngIf="isAdmin" [disabled]="!isFormValid()" (click)="deleteUser()" type="button">Delete</button>
           </td>
         </tr>
