@@ -9,6 +9,8 @@ packages include:
 * Authentication with `amazon-cognito-identity-js`
 * Sending emails with `@sendgrid/mail`
 
+## Deployed on http://spas-zahariev.cad.s3-website.eu-west-1.amazonaws.com/
+
 ![alt text](https://github.com/SpasZahariev/CAD-SpasZahariev/blob/master/src/assets/resources/repo-image.PNG)
 
 ## Setup
