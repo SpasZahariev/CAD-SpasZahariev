@@ -1,16 +1,26 @@
 # CAD-SpasZahariev
-## Individual Coursework for COMP3207 Cloud Application Development
 
-project uses the Angular CLI: 6.2.5 and Angular Material Packages
 
-to add Material Packages to project do 
+project uses the Angular CLI: 6.2.5
 
-`npm install --save @angular/material @angular/cdk @angular/animations`
+packages include:
+* Angular Material: `@angular/material`
+* Serverless Framework `serverless`
+* Authentication with `amazon-cognito-identity-js`
+* Sending emails with `@sendgrid/mail`
 
-in the project folder
-
-### Alternative
-
+### Setup
 inside root project folder:
-`npm install`
-it is magical
+Run `npm install`
+
+## Development environment
+
+Run `ng serve` for a dev server. Enter `http://localhost:4200/` in your browser's search bar or run `ng serve --o` and it will both run and open a window for you. If any of the angular files are edited - the web page will reload automatically.
+
+## Build
+
+Run `ng build` to build the project. Use the `-prod` flag for a production build.
+
+## Running unit tests
+
+Runinning `ng test` will execute unit tests on the [Karma](https://karma-runner.github.io) platform.
