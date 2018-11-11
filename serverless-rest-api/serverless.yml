@@ -76,20 +76,6 @@ provider:
 #    - exclude-me-dir/**
 
 functions:
-  hello:
-    handler: handler.hello
-    events:
-      - http:
-          path: /get-hello
-          method: get
-          cors: true
-  imageResize:
-    handler: handler.imageResize
-    events:
-      - http:
-          path: /image-resize
-          method: get
-          cors: true
   postUser:
     handler: users/postUser.postUser
     events:
