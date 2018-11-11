@@ -1,8 +1,8 @@
-<mat-card *ngIf="projectData !== null">
-  <div class="project-flexbox">
+
+<div class="project-flexbox" *ngIf="projectData !== null">
+  <mat-card >
     <form class="form" [formGroup]="projectGroup" (submit)="update()">
       <div class="flex-1">
-
         <div class="vertical-flexbox form-group">
           <mat-form-field class="example-full-width" [floatLabel]="projectGroup.value.floatLabel">
             <input matInput placeholder="Name" value="{{projectData.name}}" [formControl]="nameForm" type="text">
@@ -21,6 +21,8 @@
         <button mat-raised-button color="accent" [disabled]="isValid()" (click)="deleteProject()" type="button">Delete</button>
       </div>
     </form>
+  </mat-card>
+  <mat-card >
     <div class="flex-2">
       <div class="overflow-threshhold">
         <mat-card *ngFor="let dev of projectData.developers" class="dev-list">
@@ -32,12 +34,13 @@
           </mat-card-content>
         </mat-card>
       </div>
-
       <div *ngIf="isManager()">
         <button mat-raised-button color="primary" (click)="requestDevs()">Add Selected Developers</button>
         <button mat-raised-button color="primary" (click)="emailAssigned()">Email Assigned</button>
         <button mat-raised-button color="primary" (click)="clearDevs()">Clear All Assigned</button>
       </div>
     </div>
-  </div>
-</mat-card>
+  </mat-card>
+</div>
+
+
