@@ -1,7 +1,7 @@
 # CAD-SpasZahariev
 
 
-project uses the Angular CLI: 6.2.5
+project uses the `Angular CLI: 6.2.5`
 
 packages include:
 * Angular Material: `@angular/material`
@@ -11,7 +11,8 @@ packages include:
 
 ![alt text](https://github.com/SpasZahariev/CAD-SpasZahariev/blob/master/src/assets/resources/repo-image.PNG)
 
-### Setup
+## Setup
+
 inside root project folder:
 Run `npm install`
 
