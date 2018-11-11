@@ -28,3 +28,5 @@ Run `ng build` to build the project. Use the `--prod` flag for a production buil
 
 Runinning `ng test` will execute unit tests on the [Karma](https://karma-runner.github.io) platform.
 Run `ng test --code-coverage` to generate a `Code Coverage` report. This will generate a `coverage` folder and inside you can find an `index.html` file that will show all the statistics
+
+## Deployed on http://spas-zahariev.cad.s3-website.eu-west-1.amazonaws.com/
