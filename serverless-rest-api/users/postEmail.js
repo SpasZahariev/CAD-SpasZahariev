@@ -12,7 +12,7 @@ module.exports.postEmail = (event, context, callback) => {
   const msg = {
     to: data.recipients,
     from: "spas.zah@gmail.com",
-    subject: data.sender,
+    subject: "Cloud Application Development: " + data.sender,
     text: data.text,
     html: data.text
   };

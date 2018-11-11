@@ -5,6 +5,7 @@ import { FormControl } from '@angular/forms';
 import { IMessage, IAccessCookie } from 'src/app/common/interfaces/interfaces';
 import { SendEmailService } from 'src/app/common/services/send-email.service';
 import { CookieService } from 'ngx-cookie-service';
+import { ProjectCardComponent } from 'src/app/dashboard-page/project-card/component/project-card.component';
 
 @Component({
   selector: 'app-email-page',
@@ -15,14 +16,23 @@ export class EmailPageComponent implements OnInit {
   visible = true;
   public textForm = new FormControl();
   readonly separatorKeysCodes: number[] = [ENTER, COMMA];
-  emails: IMessage[] = [
-    { email: 'spasedno@gmail.com' },
-    { email: 'spas.zah@gmail.com' }
-  ];
+  emails: IMessage[] = [];
 
-  constructor(private emailService: SendEmailService, private cookieService: CookieService) {}
+  constructor(
+    private emailService: SendEmailService,
+    private cookieService: CookieService) {}
 
-  public ngOnInit() {}
+  public ngOnInit() {
+    if (localStorage.getItem('emails')) {
+      const storedEmails = JSON.parse(localStorage.getItem('emails'));
+      localStorage.removeItem('emails');
+      storedEmails.map((address) => {
+        this.emails.push({
+          email: address
+        });
+      });
+    }
+  }
 
   // adding email to recipients
   add(event: MatChipInputEvent): void {

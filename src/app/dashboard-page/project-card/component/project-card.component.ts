@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProjectCardService } from '../service/project-card.service';
-import { IProjectData, IAccessCookie } from 'src/app/common/interfaces/interfaces';
+import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { IAccessCookie, IProjectData } from 'src/app/common/interfaces/interfaces';
+import { ProjectCardService } from '../service/project-card.service';
 
 
 @Component({
@@ -25,7 +26,11 @@ export class ProjectCardComponent implements OnInit {
   private cookie: IAccessCookie = null;
   private isCookieSet = false;
 
-  constructor(private projectCardService: ProjectCardService, private formBuilder: FormBuilder, private cookieService: CookieService) {
+  constructor(
+    private projectCardService: ProjectCardService,
+    private formBuilder: FormBuilder,
+    private cookieService: CookieService,
+    private router: Router) {
     this.projectGroup = this.formBuilder.group({
       loatLabel: 'auto',
     });
@@ -109,5 +114,19 @@ export class ProjectCardComponent implements OnInit {
 
   public isValid(): boolean {
     return this.nameForm.value.valid && this.managerForm.value.valid && this.statusForm.value.valid && this.devsAdded;
+  }
+
+  // sends emails ev all listed empliyees in a project and sends them an email
+  public emailAssigned() {
+    if (this.projectData.developers.length === 0) {
+      return;
+    }
+    const emails: string[] = [];
+    this.projectData.developers.map((dev) => {
+      emails.push(dev.email);
+    });
+    console.log(emails);    //            delete laterrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrrr
+    localStorage.setItem('emails', JSON.stringify(emails));
+    this.router.navigate(['/', 'email-page']);
   }
 }

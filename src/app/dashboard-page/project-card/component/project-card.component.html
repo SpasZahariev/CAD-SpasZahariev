@@ -35,7 +35,7 @@
 
       <div *ngIf="isManager()">
         <button mat-raised-button color="primary" (click)="requestDevs()">Add Selected Developers</button>
-        <button mat-raised-button color="primary">Email Assigned</button>
+        <button mat-raised-button color="primary" (click)="emailAssigned()">Email Assigned</button>
         <button mat-raised-button color="primary" (click)="clearDevs()">Clear All Assigned</button>
       </div>
     </div>
