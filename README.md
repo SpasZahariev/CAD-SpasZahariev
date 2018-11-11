@@ -22,8 +22,9 @@ Run `ng serve` for a dev server. Enter `http://localhost:4200/` in your browser'
 
 ## Build
 
-Run `ng build` to build the project. Use the `-prod` flag for a production build.
+Run `ng build` to build the project. Use the `--prod` flag for a production build. This will create a new `dist` with the project ready inside
 
 ## Running unit tests
 
 Runinning `ng test` will execute unit tests on the [Karma](https://karma-runner.github.io) platform.
+Run `ng test --code-coverage` to generate a `Code Coverage` report. This will generate a `coverage` folder and inside you can find an `index.html` file that will show all the statistics
