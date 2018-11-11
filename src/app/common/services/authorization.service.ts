@@ -23,19 +23,6 @@ export class AuthorizationService {
   public register(email, password) {
     const attributeList = [];
 
-    // const emailAttribute = {
-    //   Name : 'email',
-    //   Value : email
-    // };
-    // const positionAttribute = {
-    //   Name : 'position',
-    //   Value : 'Developer'
-    // };
-
-    // // admins should later promote users to Project Manager and etc
-    // attributeList.push(new CognitoUserAttribute(emailAttribute));
-    // attributeList.push(new CognitoUserAttribute(positionAttribute));
-
     return Observable.create(observer => {
       userPool.signUp(email, password, attributeList, null, (err, result) => {
         if (err) {
@@ -45,7 +32,7 @@ export class AuthorizationService {
 
         this.cognitoUser = result.user;
         // pushes one item into the observable and stops posting
-        // cool async way
+        // observers are a cool async way
         observer.next(result);
         observer.complete();
       });
@@ -85,9 +72,48 @@ export class AuthorizationService {
       Username: email,
       Pool: userPool
     };
-    const cognitoUser = new CognitoUser(userData);
+    this.cognitoUser = new CognitoUser(userData);
     return Observable.create(observer => {
-      cognitoUser.authenticateUser(authenticationDetails, {
+      this.cognitoUser.authenticateUser(authenticationDetails, {
+        onSuccess: function(result) {
+
+          // pushes one item into the observable and stops posting
+          console.log(result);
+          observer.next(result);
+          observer.complete();
+        },
+        onFailure: function(err) {
+          console.log(err);
+          observer.error(err);
+        },
+        // when an admin created user logs in with his "temporary" password
+        newPasswordRequired: function(userAttributes, requiredAttributes) {
+          // User was signed up by an admin and must provide new
+          // password and required attributes, if any, to complete
+          // authentication.
+
+          // the api doesn't accept this field back
+          delete userAttributes.email_verified;
+
+          observer.next('newPasswordRequired');
+
+          // Get these details and call
+          // cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, this);
+      }
+      });
+    });
+  }
+
+  // if the temporary password is changed successfully => call the signIn method with it
+  public changeTempPassword(email, newPassword, userAttributes) {
+    console.log(userAttributes);
+    // const userData = {
+    //   Username: email,
+    //   Pool: userPool
+    // };
+    // const cognitoUser = new CognitoUser(userData);
+    return Observable.create(observer => {
+      this.cognitoUser.completeNewPasswordChallenge(newPassword, userAttributes, {
         onSuccess: function(result) {
 
           // pushes one item into the observable and stops posting
@@ -100,10 +126,6 @@ export class AuthorizationService {
         }
       });
     });
-  }
-
-  public isLoggedIn() {
-    return userPool.getCurrentUser() != null;
   }
 
   public getAuthenticatedUser() {

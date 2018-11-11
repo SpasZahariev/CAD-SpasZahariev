@@ -24,15 +24,9 @@ import { UserFormComponent } from './user-page/user-form/component/user-form.com
 import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
 import { SendEmailService } from './common/services/send-email.service';
 
-const JWT_Module_Options: JwtModuleOptions = {
-  config: {
-      tokenGetter: () => {
-        return localStorage.getItem('userCookie');
-      },
-      whitelistedDomains: []
-  }
-};
-
+export function tokenGetter() {
+  return localStorage.getItem('userCookie');
+}
 
 @NgModule({
   declarations: [
@@ -59,7 +53,12 @@ const JWT_Module_Options: JwtModuleOptions = {
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    JwtModule.forRoot(JWT_Module_Options)
+    JwtModule.forRoot({
+      config: {
+      tokenGetter: tokenGetter,
+      whitelistedDomains: []
+      }
+    }),
   ],
   providers: [
     AuthorizationService,

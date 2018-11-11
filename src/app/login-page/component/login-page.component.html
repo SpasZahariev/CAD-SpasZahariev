@@ -43,6 +43,15 @@
       </form>
     </mat-card-content>
   </mat-card>
+  <br>
+  <mat-card *ngIf="forceChangePassword">
+    <mat-form-field>
+      <input matInput type="password" placeholder="New Password" [formControl]="newPassword">
+      <mat-error *ngIf="showErrorMessage">Invalid Code Entered</mat-error>
+    </mat-form-field>
+    <br>
+    <button mat-raised-button color="accent" (click)="changePassword()">Submit New Password</button>
+  </mat-card>
 </div>
 
 
