@@ -9,6 +9,8 @@ packages include:
 * Authentication with `amazon-cognito-identity-js`
 * Sending emails with `@sendgrid/mail`
 
+![alt text](https://github.com/SpasZahariev/CAD-SpasZahariev/blob/master/src/assets/resources/repo-image.PNG)
+
 ### Setup
 inside root project folder:
 Run `npm install`
