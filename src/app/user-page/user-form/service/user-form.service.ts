@@ -70,10 +70,9 @@ export class UserFormService {
       );
   }
 
-  // if a stopReload parameter is given && true don't reload
-  public postUser(userData: IUserData, stopReload?: boolean) {
+  public postToUserPool (email: string) {
     const emailParam = {
-      email: userData.email
+      email: email
     };
     // creating user entry in Cognito User Pool
     this.http
@@ -84,6 +83,11 @@ export class UserFormService {
         res => console.log(res),
         err => console.log('Error occurred: ' + err.message)
       );
+  }
+
+  // if a stopReload parameter is given && true don't reload
+  public postUser(userData: IUserData, stopReload?: boolean) {
+    this.postToUserPool(userData.email);
     // creating user entry in DynamoDB
     this.http
       .post<IUserData>(this.postUserURL, userData, {
