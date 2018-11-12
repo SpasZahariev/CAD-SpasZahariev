@@ -128,22 +128,13 @@ export class UserFormComponent implements OnInit {
   }
 
   public newUser() {
-    let name = this.userGroup.value.name;
-    let email = this.userGroup.value.email;
-    let position = this.userGroup.value.position;
-    let assignment = this.userGroup.value.assignment;
-    if (this.isManager()) {
-    name = 'newUser';
-    email = 'newUser@gmail.com';
-    position = 'Developer';
-    assignment = 'Unassigned';
-    }
+    this.syncWithForm();
     const user: IUserData = {
       id: null,
-      name: name,
-      email: email,
-      position: position,
-      assignment: assignment
+      name: this.userData.name,
+      email: this.userData.email,
+      position: this.userData.position,
+      assignment: this.userData.assignment
     };
     this.userFormService.postUser(user);
   }
