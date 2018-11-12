@@ -93,11 +93,20 @@ export class UserFormComponent implements OnInit {
 
 
 
+  // used to push form values to dynamo and check if they are valid
   private syncWithForm() {
-    this.userData.name = this.userGroup.value.name;
-    this.userData.email = this.userGroup.value.email;
-    this.userData.position = this.userGroup.value.position;
-    this.userData.assignment = this.userGroup.value.assignment;
+    if (this.userGroup.value.name) {
+      this.userData.name = this.userGroup.value.name;
+    }
+    if (this.userGroup.value.email) {
+      this.userData.email = this.userGroup.value.email;
+    }
+    if (this.userGroup.value.position) {
+      this.userData.position = this.userGroup.value.position;
+    }
+    if (this.userGroup.value.assignment) {
+      this.userData.assignment = this.userGroup.value.assignment;
+    }
   }
 
   // check if selected user is the one that is logged in
@@ -119,12 +128,22 @@ export class UserFormComponent implements OnInit {
   }
 
   public newUser() {
+    let name = this.userGroup.value.name;
+    let email = this.userGroup.value.email;
+    let position = this.userGroup.value.position;
+    let assignment = this.userGroup.value.assignment;
+    if (this.isManager()) {
+    name = 'newUser';
+    email = 'newUser@gmail.com';
+    position = 'Developer';
+    assignment = 'Unassigned';
+    }
     const user: IUserData = {
       id: null,
-      name: this.userGroup.value.name,
-      email: this.userGroup.value.email,
-      position: this.userGroup.value.position,
-      assignment: this.userGroup.value.assignment
+      name: name,
+      email: email,
+      position: position,
+      assignment: assignment
     };
     this.userFormService.postUser(user);
   }

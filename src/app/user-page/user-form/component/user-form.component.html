@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="userData !== null">
   <mat-card-title>
     User Details
   </mat-card-title>
@@ -22,7 +22,7 @@
         </tr>
         <tr>
           <td>
-            <mat-radio-group class="vertical-flexbox" formControlName="position" value="{{userGroup.value.position}}">
+            <mat-radio-group class="vertical-flexbox" formControlName="position">
               <mat-radio-button value="Admin">Admin</mat-radio-button>
               <mat-radio-button value="Project Manager" style="margin-top: 5px; margin-bottom: 5px;">Project Manager</mat-radio-button>
               <mat-radio-button value="Developer" style="margin-bottom:10px;">Developer</mat-radio-button>

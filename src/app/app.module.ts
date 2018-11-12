@@ -21,6 +21,8 @@ import { UserPageComponent } from './user-page/component/user-page.component';
 import { UserFormComponent } from './user-page/user-form/component/user-form.component';
 import { UserSelectorComponent } from './user-page/user-selector/component/user-selector.component';
 import { SendEmailService } from './common/services/send-email.service';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+
 
 export function tokenGetter() {
   return localStorage.getItem('userCookie');
@@ -60,7 +62,8 @@ export function tokenGetter() {
     AuthorizationService,
     CookieService,
     AuthGuardService,
-    SendEmailService
+    SendEmailService,
+    {provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
