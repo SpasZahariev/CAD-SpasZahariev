@@ -30,3 +30,7 @@ Runinning `ng test` will execute unit tests on the [Karma](https://karma-runner.
 Run `ng test --code-coverage` to generate a `Code Coverage` report. This will generate a `coverage` folder and inside you can find an `index.html` file that will show all the statistics
 
 ## Deployed on http://spas-zahariev.cad.s3-website.eu-west-1.amazonaws.com/
+
+Accounts for testing purposes in the application:
+• name: admin_sz6u16@gmail.com
+• password: Admin1
