@@ -1,38 +1,46 @@
-# CAD-SpasZahariev
-
-
-project uses the `Angular CLI: 6.2.5`
-
-packages include:
-* Angular Material: `@angular/material`
-* Serverless Framework `serverless`
-* Authentication with `amazon-cognito-identity-js`
-* Sending emails with `@sendgrid/mail`
+# Project Management Site for Cloud App Development university module
 
 ![alt text](https://github.com/SpasZahariev/CAD-SpasZahariev/blob/master/src/assets/resources/repo-image.PNG)
 
-## Setup
+## Link to live application: [Project Management Application](http://spas-zahariev.cad.s3-website.eu-west-1.amazonaws.com/)
 
-inside root project folder:
-Run `npm install`
+## Desccription
+- Angular Web application for organising developers and projects.
+- Users can register and confirm their account by responding to a verification email
+- Once registered, users have the default **Developer** role with limited entitlements but their role can be promoted to **Manager** or **Admin**
+- Managers can create projects and assign people to them
+- Profiles include information about the projects a **Developer** is involved in.
+- There are features to filter between different user and project information.
+- There is a feature to compose and send emails to everyone in a specific project. The email sending page can also be used to send emails to individuals.
 
-## Development environment
 
-Run `ng serve` for a dev server. Enter `http://localhost:4200/` in your browser's search bar or run `ng serve --o` and it will both run and open a window for you. If any of the angular files are edited - the web page will reload automatically.
+## Technologies used
+- Angular 6
+- Typescript/Javascript
+- Serverless Framework - for configuring and deploying logic to AWS Lambda
+- Sendgrid - Service for sending emails
+- AWS Cognito - provides tools for authentication, authorisation, and stores user accounts
+- AWS S3 - serves the static web files
+- AWS Lambda - Functions as a Service Business Logic
+- AWS Dynamo DB - No SQL DB for storing/accessing the project information 
 
-## Build
 
-Run `ng build` to build the project. Use the `--prod` flag for a production build. This will create a new `dist` with the project ready inside
+## Local Setup
+1. Use a terminal inside the root project folder:
+2. Run `npm install`
+3. Run `npm start`
 
 ## Running unit tests
 
 Runinning `ng test` will execute unit tests on the [Karma](https://karma-runner.github.io) platform.
 Run `ng test --code-coverage` to generate a `Code Coverage` report. This will generate a `coverage` folder and inside you can find an `index.html` file that will show all the statistics
 
-## Deployed on http://spas-zahariev.cad.s3-website.eu-west-1.amazonaws.com/
+## Accounts to Demo Authentication and Entitlements:
 
-Accounts for testing purposes in the application
+• username: developer_sz6u16@gmail.com • password: Admin1
 
-• username: admin_sz6u16@gmail.com
+• username: manager_sz6u16@gmail.com • password: Admin1
 
-• password: Admin1
+• username: admin_sz6u16@gmail.com • password: Admin1
+
+
