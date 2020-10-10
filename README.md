@@ -45,9 +45,9 @@ Run `ng test --code-coverage` to generate a `Code Coverage` report. This will ge
 
 ## Additional Pictures
 
-<img src="./src/assets/resources/login-screen.PNG">
-<img src="./src/assets/resources/project-dashboard.PNG">
-<img src="./src/assets/resources/restricted-dev.PNG">
-<img src="./src/assets/resources/user-info.PNG">
+<img src="./src/assets/resources/login-screen.png">
+<img src="./src/assets/resources/project-dashboard.png">
+<img src="./src/assets/resources/restricted-dev.png">
+<img src="./src/assets/resources/user-info.png">
 
 
